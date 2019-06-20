@@ -40,9 +40,9 @@ handlers:
       - 'Moderator'
   reactionHandler:
     messageReactionGroups:
-      - message: '591216794723680266'
+      - message: '591238047312379920'
         reaction: '❤'
-        role: '591242418893094923'
+        role: '558020261736087552'
 
 filters:
   badWordFilter:
