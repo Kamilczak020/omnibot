@@ -44,10 +44,10 @@ handlers:
         emoji: '❤'
         role: '558020261736087552'
       - message: '591383968826523649'
-        emoji: 'exclamation'
+        emoji: '❗'
         role: '590113049889734667'
       - message: '591383968826523649'
-        emoji: 'tv'
+        emoji: '📺'
         role: '590113143213260801'
 
 filters:
