@@ -3,12 +3,10 @@ parsers:
     name: 'echoParser'
     prefix: '!'
     commands:
-      - 'echo'
       - 'kick'
       - 'ban'
       - 'mute'
       - 'unmute'
-      - 'urban'
       - 'define'
   splitParser:
     name: 'splitParser'
