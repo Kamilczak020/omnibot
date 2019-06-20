@@ -8,7 +8,10 @@
   "license": "MIT",
   "nyc": {
     "include": "src",
-    "exclude": "src/model/*"
+    "exclude": [
+      "src/model/*",
+      "src/handler/*"
+    ]
   },
   "scripts": {
     "build": "gulp",
