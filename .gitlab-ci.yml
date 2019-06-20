@@ -1,0 +1,51 @@
+image: node:latest
+  
+stages:
+  - build
+  - test
+  - containerize
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+install-dependencies:
+  stage: build
+  tags:
+    - gitlab-org
+  script: yarn
+  artifacts:
+    paths:
+      - node_modules/
+
+run-tests:
+  stage: test
+  tags:
+    - gitlab-org
+  script: yarn run coverage
+
+
+build-and-push-docker-image:
+  stage: containerize
+  tags:
+    - docker
+  image: docker:git
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $DOCKERHUB_LOGIN -p $DOCKERHUB_PASSWORD
+  script:
+    - docker pull $DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG || true
+    - docker build --cache-from $DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG --tag $DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG .
+    - docker push $DOCKERHUB_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+deploy-to-cluster:
+  stage: deploy
+  only: [master]
+  tags:
+    - builder
+  image: greenchill/kubernetes-deploy:master
+  script:
+    - sed -i "s/<VERSION>/${CI_COMMIT_REF_SLUG}/g" $DEPLOYMENT_MANIFEST
+    - kubectl apply -f $DEPLOYMENT_MANIFEST

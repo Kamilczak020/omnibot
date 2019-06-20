@@ -1,0 +1,56 @@
+{
+  "name": "omnibot",
+  "version": "1.0.0",
+  "description": "A discord bot for the RL Duels discord server",
+  "main": "index.js",
+  "repository": "https://github.com/Kamilczak020/Omnibot",
+  "author": "Kamil Solecki <kamilczak020@gmail.com>",
+  "license": "MIT",
+  "nyc": {
+    "include": "src",
+    "exclude": "src/model/*"
+  },
+  "scripts": {
+    "build": "gulp",
+    "start": "node build/index.js",
+    "sync-start": "node build/index.js sync",
+    "debug": "node --nolazy --inspect-brk=9229 build/index.js",
+    "test": "mocha --require @babel/register --require @babel/polyfill 'tests/**/**test.js'",
+    "coverage": "nyc --reporter=text-summary npm run test",
+    "coverage-full": "nyc npm run test"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "chai": "^4.2.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-merge": "^0.1.1",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "gulp-watch": "^5.0.1",
+    "jshint": "^2.10.2",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "sequelize-mock": "^0.10.2",
+    "sinon": "^7.3.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.4",
+    "axios": "^0.19.0",
+    "babel-polyfill": "^6.26.0",
+    "bunyan": "^1.8.12",
+    "discord.js": "^11.5.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.11",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.2",
+    "rxjs": "^6.5.2",
+    "sequelize": "^5.8.6"
+  }
+}

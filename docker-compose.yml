@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  rlduels-dev:
+    build: .
+    image: rlduels
+    env_file:
+      - .env

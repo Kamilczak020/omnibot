@@ -1,0 +1,67 @@
+parsers:
+  echoParser:
+    name: 'echoParser'
+    prefix: '!'
+    commands:
+      - 'echo'
+      - 'kick'
+      - 'ban'
+      - 'mute'
+      - 'unmute'
+      - 'urban'
+      - 'define'
+  splitParser:
+    name: 'splitParser'
+    prefix: '!'
+    commands:
+
+handlers:
+  defineHandler:
+    name: 'defineHandler'
+    resultsLimit: 3
+    commands:
+      - 'define'
+  echoHandler:
+    name: 'echoHandler'
+    commands: 
+      - 'echo'
+  urbanHandler:
+    name: 'urbanHandler'
+    commands: 
+      - 'urban'
+  userActionHandler:
+    name: 'userActionHandler'
+    commands:
+      - 'ban'
+      - 'kick'
+      - 'mute'
+      - 'unmute'
+    roles:
+      - 'Owner'
+      - 'Administrator'
+      - 'Moderator'
+  reactionHandler:
+    messageReactionGroups:
+      - message: '591216794723680266'
+        reaction: '❤'
+        role: '591242418893094923'
+
+filters:
+  badWordFilter:
+    name: 'badWordFilter'
+    filteredWords:
+      - 'nigger'
+      - 'cunt'
+      - 'retard'
+      - 'retarded'
+      - 'tranny'
+      - 'shemale'
+      - 'sjw'
+      - 'trannie'
+      - 'spaz'
+      - 'spastic'
+      - 'kys'
+      - 'coon'
+      - 'fag'
+      - 'faggot'
+      - 'niglet'

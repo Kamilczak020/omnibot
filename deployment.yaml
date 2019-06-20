@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: omnibot-deployment
+  namespace: omnibot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: omnibot
+  template:
+    metadata:
+      labels:
+        app: omnibot
+    spec:
+      serviceAccountName: omnibot-user-admin
+      containers:
+      - name: omnibot
+        image: greenchill/omnibot:master
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        livenessProbe:
+          httpGet:
+            path: /health/liveness
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 60
+        readinessProbe:
+          httpGet:
+            path: /health/readiness
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 60
+        env:
+        - name: DISCORD_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: discord-token
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: db-name
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: db-host
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: db-username
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: db-password
+        - name: OXFORD_APP_ID:
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: oxford-app-id
+        - name: OXFORD_APP_KEY:
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: oxford-app-key
