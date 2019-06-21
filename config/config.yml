@@ -56,7 +56,7 @@ handlers:
     commands:
       - 'none'
     channelReactionGroups:
-      - channel: '591593496301928448'
+      - channel: '557965224947482635'
         emojis:
           - '✅'
           - '❌'
