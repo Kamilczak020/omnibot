@@ -3,7 +3,6 @@ import { BaseService } from '../core/baseService';
 
 export class ReactionHandler extends BaseService {
   async handle(reaction, action) {
-    console.log(reaction.msgReaction.emoji);
     this.options.messageReactionGroups.forEach(async (reactionGroup) => {
       if (reactionGroup.message === reaction.msgReaction.message.id) {
         if (reactionGroup.emoji === reaction.msgReaction.emoji.name) {

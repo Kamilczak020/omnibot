@@ -12,6 +12,8 @@ parsers:
     name: 'splitParser'
     prefix: '!'
     commands:
+  bypassParser:
+    name: 'bypassParser'
 
 handlers:
   defineHandler:
@@ -49,6 +51,15 @@ handlers:
       - message: '591383968826523649'
         emoji: '📺'
         role: '590113143213260801'
+  channelReactionHandler:
+    name: 'channelReactionHandler'
+    commands:
+      - 'none'
+    channelReactionGroups:
+      - channel: '591593496301928448'
+        emojis:
+          - '✅'
+          - '❌'
 
 filters:
   badWordFilter:
@@ -69,3 +80,6 @@ filters:
       - 'fag'
       - 'faggot'
       - 'niglet'
+      - 'mongo'
+      - 'mongoloid'
+      - 'mong'
