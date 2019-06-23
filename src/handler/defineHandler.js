@@ -25,11 +25,10 @@ export class DefineHandler extends BaseHandler {
         'app_id': process.env.OXFORD_APP_ID,
         'app_key': process.env.OXFORD_APP_KEY
       }
+    }).catch(async (err) => {
+      await this.replyToChannel(channel, `No definitions for "${query}" were found.`);
+      return;
     });
-
-    if (response.status !== 200) {
-      return await this.replyToChannel(channel, `No definitions for "${query}" were found.`);
-    }
 
     const dictionaryEntries = [];
     response.data.results.forEach((result) => {

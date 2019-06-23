@@ -7,14 +7,14 @@ import { loadConfig } from './core/config';
 import { createDatabase } from './core/database';
 import { createLogger } from './core/logger';
 
-import { BypassParser } from './parser/bypassParser';
 import { EchoParser } from './parser/echoParser';
 import { SplitParser } from './parser/splitParser';
 import { EchoHandler } from './handler/echoHandler';
+import { BypassParser } from './parser/bypassParser';
 import { UrbanHandler } from './handler/urbanHandler';
-import { UserActionHandler } from '../build/handler/userActionHandler';
-import { DefineHandler } from './handler/defineHandler';
 import { BadWordFilter } from './filter/badWordFilter';
+import { DefineHandler } from './handler/defineHandler';
+import { UserActionHandler } from './handler/userActionHandler';
 import { ChannelReactionHandler } from './handler/channelReactionHandler';
 
 import { ReactionHandler } from './reaction/reactionHandler';
