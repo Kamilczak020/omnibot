@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 import { Message } from '../model/message'; 
 import { Command } from '../model/command';
 import { CommandData } from '../model/commandData';
+import { Warning } from '../model/warning';
 
 export function createDatabase() {
   const sequelize = new Sequelize({
@@ -17,7 +18,8 @@ export function createDatabase() {
   const models = {
     Message: Message.init(sequelize, Sequelize),
     Command: Command.init(sequelize, Sequelize),
-    CommandData: CommandData.init(sequelize, Sequelize)
+    CommandData: CommandData.init(sequelize, Sequelize),
+    Warning: Warning.init(sequelize, Sequelize)
   };
   
   Object.values(models)

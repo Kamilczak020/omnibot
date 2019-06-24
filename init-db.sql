@@ -28,6 +28,14 @@ CREATE TABLE "CommandData" (
   "CommandId" uuid
 );
 
+CREATE TABLE "Warning" (
+  id uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4(),
+  member varchar(100) NOT NULL,
+  message varchar(200) NOT NULL,
+  "createdAt" timestamp with time zone NOT NULL,
+  "updatedAt" timestamp with time zone NOT NULL
+);
+
 ALTER TABLE ONLY "CommandData"
   ADD CONSTRAINT "CommandData_pkey" PRIMARY KEY (id);
 

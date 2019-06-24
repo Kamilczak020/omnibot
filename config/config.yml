@@ -8,6 +8,8 @@ parsers:
       - 'mute'
       - 'unmute'
       - 'define'
+      - 'warn'
+      - 'listwarnings'
   splitParser:
     name: 'splitParser'
     prefix: '!'
@@ -36,6 +38,8 @@ handlers:
       - 'kick'
       - 'mute'
       - 'unmute'
+      - 'warn'
+      - 'listwarnings'
     roles:
       - 'Owner'
       - 'Administrator'
