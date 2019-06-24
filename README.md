@@ -48,9 +48,11 @@ Env variables required to run the bot are as following:
 ```
 DISCORD_TOKEN=your discord bot token
 DB_NAME=database name
-DB_HOST=database host
+DB_HOST=database host (without port, assuming default 5432)
 DB_USERNAME=database username
 DB_PASSWORD=database password
+OXFORD_APP_ID=oxford API app id
+OXFORD_APP_KEY=oxford API app key
 ```
 
 ## Docker
@@ -81,8 +83,21 @@ and adjust the values accordingly to match your cluster.
 - [x] Introduce a CD pipeline
 - [x] Implement bad word filter
 - [x] Implement role-based command handling
-- [x] Introduce a remindme command
+- [ ] Introduce a remindme command
 - [ ] Implement custom command handling and execution
+
+## Current list of commands
+1. **```!announce <type> <message>```** -- [Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.
+2. **```!ban @username```** -- [Staff only] Bans a given user from the server.
+3. **```!choose option1 option2 "multi word option" option4```** -- Given multiple options to choose from, one is returned at random. All have equal probablity.
+4. **```!define [word-class] query```** -- Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.
+5. **```!kick @username```** -- [Staff only] Kicks a given user from the server.
+6. **```!listcommands```** -- Sends a list of available bot commands in DM.
+7. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
+8. **```!mute @username```** -- [Staff only] Mutes a given user (if in voice chat).
+9. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
+10. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
+11. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
 
 ## How to contribute
 If you would like to contribute to this project, please do so by submitting PRs to the gitlab repository:

@@ -3,13 +3,18 @@ parsers:
     name: 'echoParser'
     prefix: '!'
     commands:
-      - 'kick'
+      - 'announce'
       - 'ban'
-      - 'mute'
-      - 'unmute'
+      - 'choose'
       - 'define'
-      - 'warn'
+      - 'help'
+      - 'kick'
+      - 'listcommands'
       - 'listwarnings'
+      - 'mute'
+      - 'restart'
+      - 'unmute'
+      - 'warn'
   splitParser:
     name: 'splitParser'
     prefix: '!'
@@ -18,6 +23,34 @@ parsers:
     name: 'bypassParser'
 
 handlers:
+  announcementHandler:
+    name: 'announcementHandler'
+    commands:
+      - 'announce'
+    groups:
+      - type: 'regular'
+        role: '592671098777108481'
+        channel: '592672262524633093'
+      - type: 'twitch'
+        role: '592672749969997824'
+        channel: '592672291700080641'
+    roles:
+      - 'Administrator'
+      - 'Moderator'
+      - 'Owner'
+  channelReactionHandler:
+    name: 'channelReactionHandler'
+    commands:
+      - 'none'
+    channelReactionGroups:
+      - channel: '557965224947482635'
+        emojis:
+          - '✅'
+          - '❌'
+  chooseHandler:
+    name: 'chooseHandler'
+    commands:
+      - 'choose'
   defineHandler:
     name: 'defineHandler'
     resultsLimit: 3
@@ -27,23 +60,45 @@ handlers:
     name: 'echoHandler'
     commands: 
       - 'echo'
-  urbanHandler:
-    name: 'urbanHandler'
-    commands: 
-      - 'urban'
-  userActionHandler:
-    name: 'userActionHandler'
+  helpHandler:
+    name: 'helpHandler'
     commands:
-      - 'ban'
-      - 'kick'
-      - 'mute'
-      - 'unmute'
-      - 'warn'
-      - 'listwarnings'
-    roles:
-      - 'Owner'
-      - 'Administrator'
-      - 'Moderator'
+      - 'help'
+      - 'listcommands'
+    commandList:
+      - name: 'announce'
+        usage: '!announce type message'
+        description: '[Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.'
+      - name: 'ban'
+        usage: '!ban @username'
+        description: '[Staff only] Bans a given user from the server.'
+      - name: 'choose'
+        usage: '!choose option1 option2 "multi word option" option4'
+        description: 'Given multiple options to choose from, one is returned at random. All have equal probablity.'
+      - name: 'define'
+        usage: '!define [word-class] query'
+        description: 'Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.'
+      - name: 'kick'
+        usage: '!kick @username'
+        description: '[Staff only] Kicks a given user from the server.'
+      - name: 'listcommands'
+        usage: '!listcommands'
+        description: 'Sends a list of available bot commands in DM.'
+      - name: 'listwarnings'
+        usage: '!listwarnings @username'
+        description: '[Staff only] Sends a list of warnings that have been submitted for a given user in DM.'
+      - name: 'mute'
+        usage: '!mute @username'
+        description: '[Staff only] Mutes a given user (if in voice chat).'
+      - name: 'restart'
+        usage: '!restart'
+        description: '[Staff only] Forces the bot to stop and restart itself.'
+      - name: 'unmute'
+        usage: '!unmute @username'
+        description: '[Staff only] Unmutes a given user (if in voice chat).'
+      - name: 'warn'
+        usage: '!warn @username reason'
+        description: '[Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.'
   reactionHandler:
     messageReactionGroups:
       - message: '591238047312379920'
@@ -55,35 +110,51 @@ handlers:
       - message: '591383968826523649'
         emoji: '📺'
         role: '590113143213260801'
-  channelReactionHandler:
-    name: 'channelReactionHandler'
+  restartHandler:
+    name: 'restartHandler'
     commands:
-      - 'none'
-    channelReactionGroups:
-      - channel: '557965224947482635'
-        emojis:
-          - '✅'
-          - '❌'
+      - 'restart'
+    roles:
+      - 'Administrator'
+      - 'Moderator'
+      - 'Owner'
+  urbanHandler:
+    name: 'urbanHandler'
+    commands: 
+      - 'urban'
+  userActionHandler:
+    name: 'userActionHandler'
+    commands:
+      - 'ban'
+      - 'kick'
+      - 'listwarnings'
+      - 'mute'
+      - 'unmute'
+      - 'warn'
+    roles:
+      - 'Administrator'
+      - 'Moderator'
+      - 'Owner'
 
 filters:
   badWordFilter:
     name: 'badWordFilter'
     filteredWords:
-      - 'nigger'
-      - 'cunt'
-      - 'retard'
-      - 'retarded'
-      - 'tranny'
-      - 'shemale'
-      - 'sjw'
-      - 'trannie'
-      - 'spaz'
-      - 'spastic'
-      - 'kys'
       - 'coon'
+      - 'cunt'
       - 'fag'
       - 'faggot'
-      - 'niglet'
+      - 'kys'
+      - 'mong'
       - 'mongo'
       - 'mongoloid'
-      - 'mong'
+      - 'niglet'
+      - 'nigger'
+      - 'retard'
+      - 'retarded'
+      - 'shemale'
+      - 'sjw'
+      - 'spaz'
+      - 'spastic'
+      - 'trannie'
+      - 'tranny'

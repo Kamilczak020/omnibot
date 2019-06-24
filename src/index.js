@@ -8,6 +8,9 @@ import { createDatabase } from './core/database';
 import { createLogger } from './core/logger';
 
 import { EchoParser } from './parser/echoParser';
+import { HelpHandler } from './handler/helpHandler';
+import { ChooseHandler } from './handler/chooseHandler';
+import { RestartHandler } from './handler/restartHandler';
 import { SplitParser } from './parser/splitParser';
 import { EchoHandler } from './handler/echoHandler';
 import { BypassParser } from './parser/bypassParser';
@@ -15,6 +18,7 @@ import { UrbanHandler } from './handler/urbanHandler';
 import { BadWordFilter } from './filter/badWordFilter';
 import { DefineHandler } from './handler/defineHandler';
 import { UserActionHandler } from './handler/userActionHandler';
+import { AnnouncementHandler } from './handler/announcementHandler';
 import { ChannelReactionHandler } from './handler/channelReactionHandler';
 
 import { ReactionHandler } from './reaction/reactionHandler';
@@ -39,10 +43,14 @@ bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
 bot.registerService(BypassParser, 'parser', config.parsers.bypassParser);
 
 // register handlers
+bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
 bot.registerService(EchoHandler, 'handler', config.handlers.echoHandler);
+bot.registerService(HelpHandler, 'handler', config.handlers.helpHandler);
+bot.registerService(RestartHandler, 'handler', config.handlers.restartHandler);
 bot.registerService(UserActionHandler, 'handler', config.handlers.userActionHandler);
 bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
 bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
+bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
 bot.registerService(ChannelReactionHandler, 'handler', config.handlers.channelReactionHandler);
 
 // register filters
