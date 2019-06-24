@@ -15,6 +15,7 @@ export class Bot {
     this.reactionRemove = new Subject();
 
     this.reactionHandler;
+    this.channelReactionWatcher;
 
     this.parsers = [];
     this.handlers = [];
@@ -78,6 +79,8 @@ export class Bot {
     if (filterResult.reduce((prev, next) => prev || next)) {
       return;
     }
+
+    this.channelReactionWatcher.react(msg);
 
     this.parsers.forEach(async (parser) => {
       if (await parser.check(msg)) {
@@ -183,6 +186,9 @@ export class Bot {
         break;
       case 'reactionHandler':
         this.reactionHandler = service;
+        break;
+      case 'channelReactionWatcher':
+        this.channelReactionWatcher = service;
         break;
     }
 

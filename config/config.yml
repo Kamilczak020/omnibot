@@ -19,8 +19,6 @@ parsers:
     name: 'splitParser'
     prefix: '!'
     commands:
-  bypassParser:
-    name: 'bypassParser'
 
 handlers:
   announcementHandler:
@@ -38,15 +36,6 @@ handlers:
       - 'Administrator'
       - 'Moderator'
       - 'Owner'
-  channelReactionHandler:
-    name: 'channelReactionHandler'
-    commands:
-      - 'none'
-    channelReactionGroups:
-      - channel: '557965224947482635'
-        emojis:
-          - '✅'
-          - '❌'
   chooseHandler:
     name: 'chooseHandler'
     commands:
@@ -135,6 +124,15 @@ handlers:
       - 'Administrator'
       - 'Moderator'
       - 'Owner'
+
+watchers:
+  channelReactionWatcher:
+    name: 'channelReactionWatcher'
+    channelReactionGroups:
+      - channel: '557965224947482635'
+        emojis:
+          - '✅'
+          - '❌'
 
 filters:
   badWordFilter:

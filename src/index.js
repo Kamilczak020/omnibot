@@ -13,15 +13,14 @@ import { ChooseHandler } from './handler/chooseHandler';
 import { RestartHandler } from './handler/restartHandler';
 import { SplitParser } from './parser/splitParser';
 import { EchoHandler } from './handler/echoHandler';
-import { BypassParser } from './parser/bypassParser';
 import { UrbanHandler } from './handler/urbanHandler';
 import { BadWordFilter } from './filter/badWordFilter';
 import { DefineHandler } from './handler/defineHandler';
 import { UserActionHandler } from './handler/userActionHandler';
 import { AnnouncementHandler } from './handler/announcementHandler';
-import { ChannelReactionHandler } from './handler/channelReactionHandler';
 
 import { ReactionHandler } from './reaction/reactionHandler';
+import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
 
 dotenv.config();
 
@@ -40,7 +39,6 @@ database.sequelize.authenticate().then((errors) => {
 // register parsers
 bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
 bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
-bot.registerService(BypassParser, 'parser', config.parsers.bypassParser);
 
 // register handlers
 bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
@@ -51,13 +49,15 @@ bot.registerService(UserActionHandler, 'handler', config.handlers.userActionHand
 bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
 bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
 bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
-bot.registerService(ChannelReactionHandler, 'handler', config.handlers.channelReactionHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
 
 // register reaction handlers
 bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reactionHandler);
+
+// register watchers
+bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
 
 if (process.argv[2] === 'sync') {
   try {
