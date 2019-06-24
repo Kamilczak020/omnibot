@@ -6,10 +6,10 @@ parsers:
       - 'announce'
       - 'ban'
       - 'choose'
+      - 'commands'
       - 'define'
       - 'help'
       - 'kick'
-      - 'listcommands'
       - 'listwarnings'
       - 'mute'
       - 'restart'
@@ -29,11 +29,11 @@ handlers:
       - 'announce'
     groups:
       - type: 'regular'
-        role: '592671098777108481'
-        channel: '592672262524633093'
+        role: '590113049889734667'
+        channel: '525686524944187392'
       - type: 'twitch'
-        role: '592672749969997824'
-        channel: '592672291700080641'
+        role: '590113143213260801'
+        channel: '591384965489491989'
     roles:
       - 'Administrator'
       - 'Moderator'
@@ -64,7 +64,7 @@ handlers:
     name: 'helpHandler'
     commands:
       - 'help'
-      - 'listcommands'
+      - 'commands'
     commandList:
       - name: 'announce'
         usage: '!announce type message'

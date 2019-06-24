@@ -27,7 +27,7 @@ export class HelpHandler extends BaseHandler {
         break;
       }
 
-      case 'listcommands': {
+      case 'commands': {
         const queryer = await this.client.fetchUser(message.dataValues.author);
         const dmChannel = queryer.dmChannel ? queryer.dmChannel : await queryer.createDM();
         const embed = new RichEmbed({
