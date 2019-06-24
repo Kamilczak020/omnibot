@@ -6,10 +6,10 @@ parsers:
       - 'announce'
       - 'ban'
       - 'choose'
-      - 'commands'
       - 'define'
       - 'help'
       - 'kick'
+      - 'listcommands'
       - 'listwarnings'
       - 'mute'
       - 'restart'
@@ -64,7 +64,7 @@ handlers:
     name: 'helpHandler'
     commands:
       - 'help'
-      - 'commands'
+      - 'listcommands'
     commandList:
       - name: 'announce'
         usage: '!announce type message'
