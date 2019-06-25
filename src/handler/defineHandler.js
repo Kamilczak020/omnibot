@@ -13,6 +13,16 @@ export class DefineHandler extends BaseHandler {
     const fields = 'definitions,pronunciations';
     const keywords = ['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'preposition', 'interjection', 'conjunction', 'determiner', 'exclamation'];
 
+    if (body.split(' ')[0] === 'sanitaso') {
+      const embed = new RichEmbed({
+        description: `**Definition:** I don't think it's anything important.`,
+        color: 0xFF6F61,
+        title: `Definition for query: Sanitaso`
+      });
+
+      return await this.replyToChannel(channel, embed);
+    }
+
     const potentialKeyword = body.split(' ')[0];
     const query = encodeURIComponent(body);
     const querySansKeyword = encodeURIComponent(body.split(' ').slice(1).join(' '));
