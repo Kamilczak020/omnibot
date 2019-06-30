@@ -16,4 +16,3 @@ export class ChannelReactionWatcher extends BaseService {
     });
   }
 }
-

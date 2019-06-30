@@ -6,7 +6,6 @@ export class Warning extends Model {
     return super.init({
       member: DataTypes.STRING,
       message: DataTypes.STRING,
-      createdAt: DataTypes.DATE,
       id: {
         defaultValue: DataTypes.UUIDV4,
         type: DataTypes.UUID,

@@ -4,6 +4,7 @@ import { Message } from '../model/message';
 import { Command } from '../model/command';
 import { CommandData } from '../model/commandData';
 import { Warning } from '../model/warning';
+import { Reminder } from '../model/reminder';
 
 export function createDatabase() {
   const sequelize = new Sequelize({
@@ -19,12 +20,17 @@ export function createDatabase() {
     Message: Message.init(sequelize, Sequelize),
     Command: Command.init(sequelize, Sequelize),
     CommandData: CommandData.init(sequelize, Sequelize),
-    Warning: Warning.init(sequelize, Sequelize)
+    Warning: Warning.init(sequelize, Sequelize),
+    Reminder: Reminder.init(sequelize, Sequelize)
   };
   
   Object.values(models)
     .filter((model) => typeof model.associate === 'function')
     .forEach((model) => model.associate(models));
+
+  Object.values(models)
+    .filter((model) => typeof model.registerHooks === 'function')
+    .forEach((model) => model.registerHooks());
   
   return {
     ...models,

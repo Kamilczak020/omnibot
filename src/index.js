@@ -18,6 +18,7 @@ import { BadWordFilter } from './filter/badWordFilter';
 import { DefineHandler } from './handler/defineHandler';
 import { UserActionHandler } from './handler/userActionHandler';
 import { AnnouncementHandler } from './handler/announcementHandler';
+import { RemindmeHandler } from './handler/remindmeHandler';
 
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
@@ -49,6 +50,7 @@ bot.registerService(UserActionHandler, 'handler', config.handlers.userActionHand
 bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
 bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
 bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
+bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);

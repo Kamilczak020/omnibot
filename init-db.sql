@@ -31,7 +31,17 @@ CREATE TABLE "CommandData" (
 CREATE TABLE "Warning" (
   id uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4(),
   member varchar(100) NOT NULL,
-  message varchar(200) NOT NULL,
+  message varchar(2000) NOT NULL,
+  "createdAt" timestamp with time zone NOT NULL,
+  "updatedAt" timestamp with time zone NOT NULL
+);
+
+CREATE TABLE "Reminder" (
+  id uuid UNIQUE NOT NULL DEFAULT uuid_generate_v4(),
+  author varchar(100) NOT NULL,
+  index integer NOT NULL,
+  message varchar(2000) NOT NULL,
+  "reminderDate" timestamp with time zone NOT NULL,
   "createdAt" timestamp with time zone NOT NULL,
   "updatedAt" timestamp with time zone NOT NULL
 );
@@ -42,9 +52,14 @@ ALTER TABLE ONLY "CommandData"
 ALTER TABLE ONLY "Command"
   ADD CONSTRAINT "Command_pkey" PRIMARY KEY (id);
 
-
 ALTER TABLE ONLY "Message"
   ADD CONSTRAINT "Message_pkey" PRIMARY KEY (id); 
+
+ALTER TABLE ONLY "Warning"
+  ADD CONSTRAINT "Warning_pkey" PRIMARY KEY (id);
+
+ALTER TABLE ONLY "Reminder"
+  ADD CONSTRAINT "Remindder_pkey" PRIMARY KEY (id);
 
 ALTER TABLE ONLY "CommandData"
   ADD CONSTRAINT "CommandData_CommandId_fkey" FOREIGN KEY ("CommandId") REFERENCES "Command"(id) ON UPDATE CASCADE ON DELETE SET NULL;

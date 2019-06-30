@@ -15,7 +15,7 @@ export class DefineHandler extends BaseHandler {
 
     if (body.split(' ')[0] === 'sanitaso') {
       const embed = new RichEmbed({
-        description: `**Definition:** I don't think it's anything important.`,
+        description: `**Definition:** Hehe noob :)`,
         color: 0xFF6F61,
         title: `Definition for query: Sanitaso`
       });

@@ -3,6 +3,7 @@ parsers:
     name: 'echoParser'
     prefix: '!'
     commands:
+      - 'addreminder'
       - 'announce'
       - 'ban'
       - 'choose'
@@ -34,7 +35,6 @@ handlers:
         channel: '591384965489491989'
     roles:
       - 'Administrator'
-      - 'Moderator'
       - 'Owner'
   chooseHandler:
     name: 'chooseHandler'
@@ -99,13 +99,16 @@ handlers:
       - message: '591383968826523649'
         emoji: '📺'
         role: '590113143213260801'
+  remindmeHandler:
+    name: 'remindmeHandler'
+    commands:
+      - 'addreminder'
   restartHandler:
     name: 'restartHandler'
     commands:
       - 'restart'
     roles:
       - 'Administrator'
-      - 'Moderator'
       - 'Owner'
   urbanHandler:
     name: 'urbanHandler'
