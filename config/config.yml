@@ -11,8 +11,10 @@ parsers:
       - 'help'
       - 'kick'
       - 'listcommands'
+      - 'listreminders'
       - 'listwarnings'
       - 'mute'
+      - 'removereminder'
       - 'restart'
       - 'unmute'
       - 'warn'
@@ -58,6 +60,9 @@ handlers:
       - name: 'announce'
         usage: '!announce type message'
         description: '[Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.'
+      - name: 'addreminder'
+        usage: '!addreminder time query "reminder message"'
+        description: 'Adds a personal reminder. The time query is very flexible, and does lexical parsing. Ex. !addreminder next Friday at 4:30pm "go to the dentist". Time is calculated in UTC.'
       - name: 'ban'
         usage: '!ban @username'
         description: '[Staff only] Bans a given user from the server.'
@@ -76,9 +81,15 @@ handlers:
       - name: 'listwarnings'
         usage: '!listwarnings @username'
         description: '[Staff only] Sends a list of warnings that have been submitted for a given user in DM.'
+      - name: 'listreminders'
+        usage: '!listreminders'
+        description: 'Sends a list of personal reminders in DM.'
       - name: 'mute'
         usage: '!mute @username'
         description: '[Staff only] Mutes a given user (if in voice chat).'
+      - name: 'removereminder'
+        usage: '!removereminder index'
+        description: 'Removes a reminder with a given index. You can see them by using !listreminders.'
       - name: 'restart'
         usage: '!restart'
         description: '[Staff only] Forces the bot to stop and restart itself.'
@@ -103,6 +114,8 @@ handlers:
     name: 'remindmeHandler'
     commands:
       - 'addreminder'
+      - 'listreminders'
+      - 'removereminder'
   restartHandler:
     name: 'restartHandler'
     commands:
@@ -138,6 +151,10 @@ watchers:
           - '❌'
 
 filters:
+  userFilter:
+    name: 'userFilter'
+    users:
+      - '580365552950706177'
   badWordFilter:
     name: 'badWordFilter'
     filteredWords:
@@ -159,3 +176,7 @@ filters:
       - 'spastic'
       - 'trannie'
       - 'tranny'
+
+tasks:
+  reminderTask:
+    name: 'reminderTask'
