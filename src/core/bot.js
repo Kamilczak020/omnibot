@@ -20,6 +20,7 @@ export class Bot {
     this.parsers = [];
     this.handlers = [];
     this.filters = [];
+    this.tasks = [];
 
     this.client = new Client();
   }
@@ -47,6 +48,10 @@ export class Bot {
     this.client.on('messageReactionRemove', (msgReaction, user) => this.reactionRemove.next({ msgReaction, user }));
 
     this.client.login(process.env.DISCORD_TOKEN);
+
+    this.tasks.forEach(async (task) => {
+      await task.start();
+    });
   }
 
   /**
@@ -160,7 +165,7 @@ export class Bot {
       author: msg.author.id,
       body: msg.content,
       channel: msg.channel.id,
-      guild: msg.guild.id,
+      guild: msg.guild ? msg.guild.id : '0',
       createdAt: msg.createdAt,
       id: msg.id,
       reactions: msg.reactions.map((r) => r.emoji.name)
@@ -183,6 +188,9 @@ export class Bot {
         break;
       case 'filter':
         this.filters.push(service);
+        break;
+      case 'task': 
+        this.tasks.push(service);
         break;
       case 'reactionHandler':
         this.reactionHandler = service;
