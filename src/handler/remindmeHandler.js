@@ -3,9 +3,11 @@ import { BaseHandler } from './baseHandler';
 import { Message } from '../model/message';
 import { Reminder } from '../model/reminder';
 import { isNil, isEmpty } from 'lodash';
-import { differenceInSeconds, differenceInYears, format } from 'date-fns';
+import { differenceInMilliseconds, differenceInSeconds, differenceInYears, format } from 'date-fns';
 import { RichEmbed } from 'discord.js';
 import * as chrono from 'chrono-node';
+
+const TIMEOUT_MAX = 2147483647;
 
 export class RemindmeHandler extends BaseHandler {
   async handle(cmd) {
@@ -44,7 +46,11 @@ export class RemindmeHandler extends BaseHandler {
         });
         await reminder.save();
     
-        return await this.replyToChannel(channel, `A reminder has been set for ${format(date, 'Do MMM YYYY, HH:mm:ss')}`);
+        const timeDifference = differenceInMilliseconds(reminder.dataValues.reminderDate, referenceDate);
+        if (timeDifference < TIMEOUT_MAX) {
+          setTimeout(() => this.executeReminder(reminder.dataValues.id), timeDifference);
+        }
+        return await this.replyToChannel(channel, `A reminder for ${format(date, 'Do MMM YYYY, HH:mm:ss')} [UTC] has been created.`);
       }
       
       case 'removereminder': {
@@ -72,12 +78,25 @@ export class RemindmeHandler extends BaseHandler {
         const embed = new RichEmbed({
           title: `List of ongoing reminders:`,
           color: 0xFF6F61,
-          description: reminders.map((reminder) => `**Date:** ${format(reminder.dataValues.reminderDate, 'Do MMM YYYY, HH:mm:ss')}\n**Message:** ${reminder.dataValues.message}\n\n`)
+          description: reminders.map((reminder) => `**ID:** ${reminder.dataValues.index}\n**Date:** ${format(reminder.dataValues.reminderDate, 'Do MMM YYYY, HH:mm:ss')}\n**Message:** ${reminder.dataValues.message}`).join('\n\n')
         });
 
         await dmChannel.send('This is your current list of reminders:', embed); 
         return await this.replyToChannel(channel, 'Sent a list of reminders in DM.');
       }
     }
+  }
+
+  async executeReminder(id) {
+    const reminder = await Reminder.findOne({ where: { id }});
+    if (isNil(reminder)) return;
+    
+    const user = await this.client.fetchUser(reminder.dataValues.author);
+    if (isNil(user)) return;
+
+    const dmChannel = user.dmChannel ? user.dmChannel : await user.createDM();
+    await dmChannel.send(`**You have a reminder:** [${format(reminder.dataValues.reminderDate, 'Do MMM YYYY, HH:mm:ss')}]${reminder.dataValues.message}`);
+
+    await reminder.destroy();
   }
 }
