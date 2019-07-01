@@ -20,8 +20,11 @@ import { UserActionHandler } from './handler/userActionHandler';
 import { AnnouncementHandler } from './handler/announcementHandler';
 import { RemindmeHandler } from './handler/remindmeHandler';
 
+import { ReminderTask } from './task/reminderTask';
+
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
+import { UserFilter } from './filter/userFilter';
 
 dotenv.config();
 
@@ -54,12 +57,16 @@ bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler)
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
+bot.registerService(UserFilter, 'filter', config.filters.userFilter);
 
 // register reaction handlers
 bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reactionHandler);
 
 // register watchers
 bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
+
+// register tasks
+bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
 
 if (process.argv[2] === 'sync') {
   try {
