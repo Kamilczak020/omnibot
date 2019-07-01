@@ -29,7 +29,7 @@ run-tests:
 build-and-push-docker-image:
   stage: containerize
   tags:
-    - gooses
+    - builder
   image: docker:git
   services:
     - docker:dind
@@ -44,7 +44,7 @@ deploy-to-cluster:
   stage: deploy
   only: [master]
   tags:
-    - gooses
+    - builder
   image: greenchill/kubernetes-deploy:master
   script:
     - sed -i "s/<VERSION>/${CI_COMMIT_REF_SLUG}/g" $DEPLOYMENT_MANIFEST
