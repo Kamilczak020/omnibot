@@ -44,7 +44,7 @@ deploy-to-cluster:
   stage: deploy
   only: [master]
   tags:
-    - builder
+    - gooses
   image: greenchill/kubernetes-deploy:master
   script:
     - sed -i "s/<VERSION>/${CI_COMMIT_REF_SLUG}/g" $DEPLOYMENT_MANIFEST
