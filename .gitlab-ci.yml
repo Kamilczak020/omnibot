@@ -29,7 +29,7 @@ run-tests:
 build-and-push-docker-image:
   stage: containerize
   tags:
-    - docker
+    - gooses
   image: docker:git
   services:
     - docker:dind
