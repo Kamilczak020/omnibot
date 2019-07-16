@@ -18,7 +18,7 @@ export class RemindmeHandler extends BaseHandler {
 
     switch (command) {
       case 'addreminder': {
-        const [reminderDate, reminderQuery] = msgBody.split(/("[^"]*")/g);
+        const [reminderDate, reminderQuery] = msgBody.split(/(["“”][^"“”]*["“”])/g);
 
         const referenceDate = Date.now();
         const date = chrono.parseDate(reminderDate, referenceDate, { forwardDate: true });

@@ -129,6 +129,7 @@ handlers:
       - 'urban'
   userActionHandler:
     name: 'userActionHandler'
+    muteRole: '593094028749438976'
     commands:
       - 'ban'
       - 'kick'

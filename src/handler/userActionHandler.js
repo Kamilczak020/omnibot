@@ -25,6 +25,7 @@ export class UserActionHandler extends BaseHandler {
 
     const guild = await this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
     const member = await guild.fetchMember(user);
+    const muteRole = guild.roles.find((guildRole) => guildRole.id === this.options.muteRole);
 
     let response;
     switch (command) {
@@ -48,11 +49,13 @@ export class UserActionHandler extends BaseHandler {
 
       case 'mute':
         member.setMute(true, 'You have violated the law!');
+        await member.addRole(muteRole);
         response = 'User has been muted.';
         break;
 
       case 'unmute': 
         member.setMute(false, 'Thy sins have been excused!');
+        await member.removeRole(muteRole);
         response = 'User has been unmuted.';
         break;
 
