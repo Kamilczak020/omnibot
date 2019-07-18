@@ -42,6 +42,11 @@ handlers:
     name: 'chooseHandler'
     commands:
       - 'choose'
+  confessionHandler:
+    name: 'confessionHandler'
+    guild: '449627157048852504'
+    channel: '592394347295670282'
+    command: '!confess'
   defineHandler:
     name: 'defineHandler'
     resultsLimit: 3
@@ -68,7 +73,7 @@ handlers:
         description: '[Staff only] Bans a given user from the server.'
       - name: 'choose'
         usage: '!choose option1 option2 "multi word option" option4'
-        description: 'Given multiple options to choose from, one is returned at random. All have equal probablity.'
+        description: 'Given multiple options to choose from, one is returned at random. All have equal probability.'
       - name: 'define'
         usage: '!define [word-class] query'
         description: 'Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.'

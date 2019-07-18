@@ -12,8 +12,8 @@ export class BadWordFilter extends BaseService {
 
       if (message.deletable) {
         message.delete();
-        return true;
       }
+      return true;
     }
     return false;
   }

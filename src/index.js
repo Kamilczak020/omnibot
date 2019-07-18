@@ -25,6 +25,7 @@ import { ReminderTask } from './task/reminderTask';
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
 import { UserFilter } from './filter/userFilter';
+import { ConfessionHandler } from './handler/confessionHandler';
 
 dotenv.config();
 
@@ -54,6 +55,7 @@ bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
 bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
 bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
 bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
+bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.confessionHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);

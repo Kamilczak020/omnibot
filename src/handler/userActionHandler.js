@@ -12,10 +12,12 @@ export class UserActionHandler extends BaseHandler {
     const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId }});
     const channel = message.dataValues.channel;
 
-    const regex = /<@(\d*)>/g;
-    const matched = await regex.exec(body.split(' ')[0]);
-    if (isNil(matched)) {
-      return await this.replyToChannel(channel, 'User was not found.');
+    const userRegex = /<@\!?(\d*)>/g;
+    const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
+    const matchedUser = await userRegex.exec(body.split(' ')[0]);
+    const matchedConfession = await confessionRegex.exec(body.split(' ')[0]);
+    if (isNil(matchedUser) || isNil(matchedConfession)) {
+      return await this.replyToChannel(channel, 'User / Confession was not found.');
     }
 
     const user = await this.client.users.find((user) => user.id === matched[1]);
