@@ -8,8 +8,8 @@ import { Op } from 'sequelize';
 const TIMEOUT_MAX = 2147483647;
 
 export class ReminderTask extends BaseTask {
-  constructor(client, logger, options) {
-    super(client, logger, options);
+  constructor(client, logger, store, options) {
+    super(client, logger, store, options);
   }
 
   async start() {
