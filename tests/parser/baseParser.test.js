@@ -6,6 +6,7 @@ import { MessageMock } from '../model/message.test';
 import { Client } from 'discord.js';
 
 const discordClient = sinon.createStubInstance(Client);
+const store = sinon.stub();
 const logger = sinon.stub();
 logger.debug = sinon.stub();
 
@@ -20,7 +21,7 @@ const thirdMessage = MessageMock.build({ body: '!test2' });
 const fourthMessage = MessageMock.build({ body: '!test3 example' });
 
 
-const parser = new BaseParser(discordClient, logger, options);
+const parser = new BaseParser(discordClient, logger, store, options);
 describe('Base Parser', () => {
   it('Should return true when you have a command name match', async () => {
     const firstResult = await parser.check(firstMessage);
