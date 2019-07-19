@@ -3,15 +3,10 @@ import { BaseService } from '../core/baseService';
 import { isNil, isEmpty } from 'lodash';
 import { RichEmbed } from 'discord.js';
 import { v4 as uuid } from 'uuid';
+import { differenceInSeconds, format } from 'date-fns';
 
 
 export class ConfessionHandler extends BaseService {
-  constructor(client, logger, options) {
-    super(client, logger, options);
-
-    this.confessions = [];
-  }
-
   async check(msg) {
     if (msg.dataValues.guild !== '0') return false;
 
@@ -36,8 +31,16 @@ export class ConfessionHandler extends BaseService {
       return await this.replyToChannel(channel, 'Confession message is required.');
     }
 
-    const confession = { id: uuid(), author: msg.dataValues.author };
-    this.confessions.push(confession);
+    const userConfessions = this.store.confessions.filter((confession) => confession.author === msg.dataValues.author);
+    const throttleConfessions = userConfessions.filter((confession) => differenceInSeconds(Date.now(), confession.time) < this.options.throttle);
+    if (!isEmpty(throttleConfessions)) {
+      const lastConfession = throttleConfessions.sort((a, b) => b.time - a.time).pop();
+      const timeDiff = differenceInSeconds(Date.now(), lastConfession.time);
+      return await this.replyToChannel(channel, `Limit of 1 confession per ${this.options.throttle} seconds. Time left: ${120 - timeDiff} seconds.`);
+    }
+
+    const confession = { id: uuid(), author: msg.dataValues.author, time: Date.now() };
+    this.store.confessions.push(confession);
 
     const embed = new RichEmbed({
       title: `Confession ID: ${confession.id}`,
@@ -49,6 +52,10 @@ export class ConfessionHandler extends BaseService {
     const confessionsChannel = guild.channels.find((guildChannel) => guildChannel.id === this.options.channel);
 
     await confessionsChannel.send(embed);
-    return await this.client.channels.get(channel).send(`Confession with ID "${confession.id}" has been submitted.`);
+    return await this.replyToChannel(channel, `Confession with ID "${confession.id}" has been submitted.`);
+  }
+
+  async replyToChannel(channel, message) {
+    await this.client.channels.get(channel).send(message);
   }
 }

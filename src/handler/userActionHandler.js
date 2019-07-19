@@ -14,18 +14,21 @@ export class UserActionHandler extends BaseHandler {
 
     const userRegex = /<@\!?(\d*)>/g;
     const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
-    const matchedUser = await userRegex.exec(body.split(' ')[0]);
-    const matchedConfession = await confessionRegex.exec(body.split(' ')[0]);
-    if (isNil(matchedUser) || isNil(matchedConfession)) {
+    const matchedUser = userRegex.exec(body.split(' ')[0]);
+    const matchedConfession = confessionRegex.exec(body.split(' ')[0]);
+    if (isNil(matchedUser) && isNil(matchedConfession)) {
       return await this.replyToChannel(channel, 'User / Confession was not found.');
     }
 
-    const user = await this.client.users.find((user) => user.id === matched[1]);
-    if (isNil(user)) {
-      return await this.replyToChannel(channel, 'User was not found.');
+    const potentialUser = matchedUser ? this.client.users.find((user) => user.id === matchedUser[1]) : null;
+    const potentialConfession = matchedConfession ? this.store.confessions.find((confession) => confession.id === matchedConfession[0]) : null;
+    if (isNil(potentialUser) && isNil(potentialConfession)) {
+      return await this.replyToChannel(channel, 'User / Confession was not found.');
     }
 
-    const guild = await this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
+    const isConfession = !isNil(potentialConfession);
+    const user = potentialUser ? potentialUser : this.client.users.find((user) => user.id === potentialConfession.author);
+    const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
     const member = await guild.fetchMember(user);
     const muteRole = guild.roles.find((guildRole) => guildRole.id === this.options.muteRole);
 
@@ -49,17 +52,29 @@ export class UserActionHandler extends BaseHandler {
         response = 'User banned successfully.';
         break;
 
-      case 'mute':
+      case 'mute': {
+        if (isConfession) {
+          response = 'Cannot mute a confession submitter.';
+          break;
+        }
+
         member.setMute(true, 'You have violated the law!');
         await member.addRole(muteRole);
         response = 'User has been muted.';
         break;
+      }
 
-      case 'unmute': 
+      case 'unmute': {
+        if (isConfession) {
+          response = 'Cannot unmute a confession submitter.';
+          break;
+        }
+
         member.setMute(false, 'Thy sins have been excused!');
         await member.removeRole(muteRole);
         response = 'User has been unmuted.';
         break;
+      }
 
       case 'warn': {
         const warningCount = await Warning.count({ where: { 'member': user.id }});
