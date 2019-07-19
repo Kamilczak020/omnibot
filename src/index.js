@@ -19,13 +19,14 @@ import { DefineHandler } from './handler/defineHandler';
 import { UserActionHandler } from './handler/userActionHandler';
 import { AnnouncementHandler } from './handler/announcementHandler';
 import { RemindmeHandler } from './handler/remindmeHandler';
+import { ConfessionHandler } from './handler/confessionHandler';
+import { DeleteHandler } from './handler/deleteHandler';
 
 import { ReminderTask } from './task/reminderTask';
 
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
 import { UserFilter } from './filter/userFilter';
-import { ConfessionHandler } from './handler/confessionHandler';
 
 dotenv.config();
 
@@ -56,6 +57,7 @@ bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
 bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
 bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
 bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.confessionHandler);
+bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);

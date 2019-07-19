@@ -8,6 +8,7 @@ parsers:
       - 'ban'
       - 'choose'
       - 'define'
+      - 'delete'
       - 'help'
       - 'kick'
       - 'listcommands'
@@ -44,14 +45,22 @@ handlers:
       - 'choose'
   confessionHandler:
     name: 'confessionHandler'
-    guild: '449627157048852504'
-    channel: '592394347295670282'
+    guild: '525683090559991859'
+    channel: '557967042032959492'
     command: '!confess'
+    throttle: 120
   defineHandler:
     name: 'defineHandler'
     resultsLimit: 3
     commands:
       - 'define'
+  deleteHandler:
+    name: 'deleteHandler'
+    commands:
+      - 'delete'
+    roles:
+      - 'Administrator'
+      - 'Owner'
   echoHandler:
     name: 'echoHandler'
     commands: 
@@ -67,18 +76,24 @@ handlers:
         description: '[Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.'
       - name: 'addreminder'
         usage: '!addreminder time query "reminder message"'
-        description: 'Adds a personal reminder. The time query is very flexible, and does lexical parsing. Ex. !addreminder next Friday at 4:30pm "go to the dentist". Time is calculated in UTC.'
+        description: 'Adds a personal reminder. The time query is a very flexible parameter, and does lexical parsing. Ex. !addreminder next Friday at 4:30pm "go to the dentist". Time is calculated in UTC.'
       - name: 'ban'
-        usage: '!ban @username'
+        usage: '!ban @username OR confessionID'
         description: '[Staff only] Bans a given user from the server.'
       - name: 'choose'
         usage: '!choose option1 option2 "multi word option" option4'
         description: 'Given multiple options to choose from, one is returned at random. All have equal probability.'
+      - name: 'confess'
+        usage: '!confess your message goes here'
+        description: 'Submits an anonymous confession, that supports full discord formatting. This can be only used in DMs with the bot. Sending confessions is throttled to one per 2 minutes.'
+      - name: 'delete'
+        usage: '!delete #channel amount'
+        description: '[Staff only] Deletes the last x messages from given channel.'
       - name: 'define'
         usage: '!define [word-class] query'
         description: 'Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.'
       - name: 'kick'
-        usage: '!kick @username'
+        usage: '!kick @username OR confessionID'
         description: '[Staff only] Kicks a given user from the server.'
       - name: 'listcommands'
         usage: '!listcommands'
@@ -102,7 +117,7 @@ handlers:
         usage: '!unmute @username'
         description: '[Staff only] Unmutes a given user (if in voice chat).'
       - name: 'warn'
-        usage: '!warn @username reason'
+        usage: '!warn @username OR confessionID reason'
         description: '[Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.'
   reactionHandler:
     messageReactionGroups:
