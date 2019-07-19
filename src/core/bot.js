@@ -2,6 +2,7 @@
 import { Client } from 'discord.js';
 import { Subject } from 'rxjs';
 import { Message } from '../model/message';
+import { DataStore } from './dataStore';
 
 export class Bot {
   constructor(logger) {
@@ -22,6 +23,8 @@ export class Bot {
     this.handlers = [];
     this.filters = [];
     this.tasks = [];
+
+    this.dataStore = new DataStore();
 
     this.client = new Client();
   }
@@ -183,7 +186,7 @@ export class Bot {
    * @param {*} options service options
    */
   registerService(serviceDefinition, serviceType, options) {
-    const service = new serviceDefinition(this.client, this.logger, options);
+    const service = new serviceDefinition(this.client, this.logger, this.dataStore, options);
     switch(serviceType) {
       case 'parser':
         this.parsers.push(service);
