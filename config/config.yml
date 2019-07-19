@@ -48,7 +48,7 @@ handlers:
     guild: '525683090559991859'
     channel: '557967042032959492'
     command: '!confess'
-    throttle: 5
+    throttle: 120
   defineHandler:
     name: 'defineHandler'
     resultsLimit: 3
