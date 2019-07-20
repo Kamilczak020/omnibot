@@ -51,7 +51,8 @@ export class Bot {
     this.client.on('messageReactionAdd', (msgReaction, user) => this.reactionAdd.next({ msgReaction, user }));
     this.client.on('messageReactionRemove', (msgReaction, user) => this.reactionRemove.next({ msgReaction, user }));
 
-    this.client.login(process.env.DISCORD_TOKEN);
+    await this.client.login(process.env.DISCORD_TOKEN);
+    await this.client.user.setPresence({ game: { name: '!listcommands' }, status: 'online' });
 
     this.tasks.forEach(async (task) => {
       await task.start();
