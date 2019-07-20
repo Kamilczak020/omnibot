@@ -47,6 +47,6 @@ deploy-to-cluster:
     - builder
   image: greenchill/kubernetes-deploy:master
   script:
-    - kubectl delete deployment omnibot-deployment -n omnibot
+    - sed -i "s/<COMMIT_SHA>/${CI_COMMIT_SHA}/g" $DEPLOYMENT_MANIFEST
     - sed -i "s/<VERSION>/${CI_COMMIT_REF_SLUG}/g" $DEPLOYMENT_MANIFEST
     - kubectl apply -f $DEPLOYMENT_MANIFEST

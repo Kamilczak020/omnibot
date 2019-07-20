@@ -3,6 +3,8 @@ kind: Deployment
 metadata:
   name: omnibot-deployment
   namespace: omnibot
+  annotations:
+    commit: <COMMIT_SHA>
 spec:
   replicas: 1
   selector:
