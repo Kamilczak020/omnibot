@@ -83,21 +83,26 @@ and adjust the values accordingly to match your cluster.
 - [x] Introduce a CD pipeline
 - [x] Implement bad word filter
 - [x] Implement role-based command handling
-- [ ] Introduce a remindme command
+- [x] Introduce a remindme command
 - [ ] Implement custom command handling and execution
 
 ## Current list of commands
 1. **```!announce <type> <message>```** -- [Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.
-2. **```!ban @username```** -- [Staff only] Bans a given user from the server.
-3. **```!choose option1 option2 "multi word option" option4```** -- Given multiple options to choose from, one is returned at random. All have equal probablity.
-4. **```!define [word-class] query```** -- Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.
-5. **```!kick @username```** -- [Staff only] Kicks a given user from the server.
-6. **```!listcommands```** -- Sends a list of available bot commands in DM.
-7. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
-8. **```!mute @username```** -- [Staff only] Mutes a given user (if in voice chat).
-9. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
-10. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
-11. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
+2. **```!addreminder <time query> "<message>"```** -- Adds a personal reminder. The time query is a very flexible parameter, and does lexical parsing. Ex. !addreminder next Friday at 4:30pm "go to the dentist". Time is calculated in UTC.
+3. **```!ban @username```** -- [Staff only] Bans a given user from the server.
+4. **```!choose option1 option2 "multi word option" option4```** -- Given multiple options to choose from, one is returned at random. All have equal probablity.
+5. **```!confess <message>```** -- Submits an anonymous confession, that supports full discord formatting. This can be only used in DMs with the bot. Sending confessions is throttled to one per 2 minutes.
+6. **```!delete <channel name> <count>```** -- [Staff only] Deletes the last x messages from given channel.
+7. **```!define [word-class] query```** -- Returns a dictionary definition for a given query. Word class (noun, verb, etc.) is an optional parameter and is used to narrow down the results.
+8. **```!kick @username```** -- [Staff only] Kicks a given user from the server.
+9. **```!listcommands```** -- Sends a list of available bot commands in DM.
+10. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
+11. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
+12. **```!mute @username```** -- [Staff only] Mutes a given user (if in voice chat).
+13. **```!listreminders```** -- Sends a list of personal reminders in DM.
+14. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
+15. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
+16. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
 
 ## How to contribute
 If you would like to contribute to this project, please do so by submitting PRs to the gitlab repository:
