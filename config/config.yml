@@ -1,12 +1,17 @@
 parsers:
+  customCommandParser:
+    name: 'customCommandParser'
+    prefix: '!'
   echoParser:
     name: 'echoParser'
     prefix: '!'
     commands:
+      - 'addcommand'
       - 'addreminder'
       - 'announce'
       - 'ban'
       - 'choose'
+      - 'customcommands'
       - 'define'
       - 'delete'
       - 'help'
@@ -15,6 +20,7 @@ parsers:
       - 'listreminders'
       - 'listwarnings'
       - 'mute'
+      - 'removecommand'
       - 'removereminder'
       - 'restart'
       - 'unmute'
@@ -43,12 +49,23 @@ handlers:
     name: 'chooseHandler'
     commands:
       - 'choose'
+  commandManagerHandler:
+    name: 'commandManagerHandler'
+    commands:
+      - 'addcommand'
+      - 'customcommands'
+      - 'removecommand'
+    roles:
+      - 'Administrator'
+      - 'Owner'
   confessionHandler:
     name: 'confessionHandler'
     guild: '525683090559991859'
     channel: '557967042032959492'
     command: '!confess'
     throttle: 120
+  customCommandHandler:
+    name: 'customCommandHandler'
   defineHandler:
     name: 'defineHandler'
     resultsLimit: 3
@@ -74,6 +91,9 @@ handlers:
       - name: 'announce'
         usage: '!announce type message'
         description: '[Staff only] Posts an announcement of the given type (regular / twitch) with a given message in an appropriate channel.'
+      - name: 'addcommand'
+        usage: '!addcommand commandname data'
+        description: '[Staff only] Adds a custom command of a given name.'
       - name: 'addreminder'
         usage: '!addreminder time query "reminder message"'
         description: 'Adds a personal reminder. The time query is a very flexible parameter, and does lexical parsing. Ex. !addreminder next Friday at 4:30pm "go to the dentist". Time is calculated in UTC.'
@@ -86,6 +106,9 @@ handlers:
       - name: 'confess'
         usage: '!confess your message goes here'
         description: 'Submits an anonymous confession, that supports full discord formatting. This can be only used in DMs with the bot. Sending confessions is throttled to one per 2 minutes.'
+      - name: 'customcommands'
+        usage: '!customcommands'
+        description: '[Staff only] Sends a list of custom commands in DM.'
       - name: 'delete'
         usage: '!delete #channel amount'
         description: '[Staff only] Deletes the last x messages from given channel.'
@@ -107,6 +130,9 @@ handlers:
       - name: 'mute'
         usage: '!mute @username'
         description: '[Staff only] Mutes a given user (if in voice chat).'
+      - name: 'removecommand'
+        usage: '!removecommand commandname'
+        description: '[Staff only] Removes a custom command of a given name.'
       - name: 'removereminder'
         usage: '!removereminder index'
         description: 'Removes a reminder with a given index. You can see them by using !listreminders.'
