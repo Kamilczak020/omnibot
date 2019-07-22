@@ -93,6 +93,11 @@ export class UserActionHandler extends BaseHandler {
       }
 
       case 'listwarnings': {
+        if (isConfession) {
+          response = 'Cannot list warnings using ConfessionID.';
+          break;
+        }
+
         const warnings = await Warning.findAll({ where: { 'member': user.id }});
         const queryer = await this.client.fetchUser(message.dataValues.author);
         const dmChannel = queryer.dmChannel ? queryer.dmChannel : await queryer.createDM();
