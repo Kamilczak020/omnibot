@@ -3,6 +3,7 @@ import { Sequelize } from 'sequelize';
 import { Message } from '../model/message'; 
 import { Command } from '../model/command';
 import { CommandData } from '../model/commandData';
+import { CustomCommand } from '../model/customCommand';
 import { Warning } from '../model/warning';
 import { Reminder } from '../model/reminder';
 
@@ -20,6 +21,7 @@ export function createDatabase() {
     Message: Message.init(sequelize, Sequelize),
     Command: Command.init(sequelize, Sequelize),
     CommandData: CommandData.init(sequelize, Sequelize),
+    CustomCommand: CustomCommand.init(sequelize, Sequelize),
     Warning: Warning.init(sequelize, Sequelize),
     Reminder: Reminder.init(sequelize, Sequelize)
   };
