@@ -23,6 +23,7 @@ import { ConfessionHandler } from './handler/confessionHandler';
 import { DeleteHandler } from './handler/deleteHandler';
 import { CommandManagerHandler } from './handler/commandManagerHandler';
 import { CustomCommandHandler } from './handler/customCommandHandler';
+import { MathHandler } from './handler/mathHandler';
 
 import { ReminderTask } from './task/reminderTask';
 
@@ -64,6 +65,7 @@ bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.conf
 bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
 bot.registerService(CustomCommandHandler, 'handler', config.handlers.customCommandHandler);
 bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
+bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
