@@ -21,12 +21,15 @@ import { AnnouncementHandler } from './handler/announcementHandler';
 import { RemindmeHandler } from './handler/remindmeHandler';
 import { ConfessionHandler } from './handler/confessionHandler';
 import { DeleteHandler } from './handler/deleteHandler';
+import { CommandManagerHandler } from './handler/commandManagerHandler';
+import { CustomCommandHandler } from './handler/customCommandHandler';
 
 import { ReminderTask } from './task/reminderTask';
 
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
 import { UserFilter } from './filter/userFilter';
+import { CustomCommandParser } from './parser/customCommandParser';
 
 dotenv.config();
 
@@ -45,6 +48,7 @@ database.sequelize.authenticate().then((errors) => {
 // register parsers
 bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
 bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
+bot.registerService(CustomCommandParser, 'parser', config.parsers.customCommandParser);
 
 // register handlers
 bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
@@ -58,6 +62,8 @@ bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcement
 bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
 bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.confessionHandler);
 bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
+bot.registerService(CustomCommandHandler, 'handler', config.handlers.customCommandHandler);
+bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
