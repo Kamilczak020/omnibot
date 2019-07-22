@@ -19,6 +19,7 @@ parsers:
       - 'listcommands'
       - 'listreminders'
       - 'listwarnings'
+      - 'math'
       - 'mute'
       - 'removecommand'
       - 'removereminder'
@@ -127,6 +128,9 @@ handlers:
       - name: 'listreminders'
         usage: '!listreminders'
         description: 'Sends a list of personal reminders in DM.'
+      - name: 'math'
+        usage: '!math expression'
+        description: 'Evaluates a given expression.'
       - name: 'mute'
         usage: '!mute @username'
         description: '[Staff only] Mutes a given user (if in voice chat).'
@@ -145,6 +149,10 @@ handlers:
       - name: 'warn'
         usage: '!warn @username OR confessionID reason'
         description: '[Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.'
+  mathHandler:
+    name: 'mathHandler'
+    commands:
+      - 'math'
   reactionHandler:
     messageReactionGroups:
       - message: '591238047312379920'
