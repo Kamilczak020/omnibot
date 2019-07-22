@@ -85,6 +85,7 @@ and adjust the values accordingly to match your cluster.
 - [x] Implement role-based command handling
 - [x] Introduce a remindme command
 - [x] Implement custom command handling and execution
+- [x] Implement a math command
 - [ ] Refactor how command data is passed between parsers / handlers
 
 ## Current list of commands
@@ -101,13 +102,14 @@ and adjust the values accordingly to match your cluster.
 11. **```!listcommands```** -- Sends a list of available bot commands in DM.
 12. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
 13. **```!listwarnings @username```** -- [Staff only] Sends a list of warnings that have been submitted for a given user in DM.
-14. **```!mute @username```** -- [Staff only] Mutes a given user (if in voice chat).
-15. **```!listreminders```** -- Sends a list of personal reminders in DM.
-16. **```!removecommand <name>```** -- [Staff only] Removes a command of a given name.
-17. **```!removereminder <index>```** -- Removes a reminder with a given index. You can see them by using !listreminders.
-18. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
-19. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
-20. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
+14. **```!math <expression>```** -- Evaluates a given expression.
+15. **```!mute @username```** -- [Staff only] Mutes a given user (if in voice chat).
+16. **```!listreminders```** -- Sends a list of personal reminders in DM.
+17. **```!removecommand <name>```** -- [Staff only] Removes a command of a given name.
+19. **```!removereminder <index>```** -- Removes a reminder with a given index. You can see them by using !listreminders.
+19. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
+20. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
+21. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
 
 ## How to contribute
 If you would like to contribute to this project, please do so by submitting PRs to the gitlab repository:
