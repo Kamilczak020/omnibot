@@ -49,7 +49,7 @@ export class CommandManagerHandler extends BaseHandler {
           fields: customCommands.map((customCommand) => {
             return {
               name: `**${customCommand.dataValues.name}**`,
-              value: `**Command data: **: ${customCommand.dataValues.body}`
+              value: `**Command data: ** ${customCommand.dataValues.body}`
             }
           })
         });

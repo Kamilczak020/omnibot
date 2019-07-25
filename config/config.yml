@@ -129,7 +129,7 @@ handlers:
         usage: '!listreminders'
         description: 'Sends a list of personal reminders in DM.'
       - name: 'math'
-        usage: '!math expression'
+        usage: '!math <expression>, !math derivative <expression>, !math simplify <expression>'
         description: 'Evaluates a given expression.'
       - name: 'mute'
         usage: '!mute @username'
