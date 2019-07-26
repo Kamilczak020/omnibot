@@ -1,8 +1,8 @@
 'use strict';
 import { BaseHandler } from './baseHandler';
 import { Message } from '../model/message';
-import { evaluate, derivative, parse, simplify } from 'mathjs';
-import { isNil, isEmpty, includes } from 'lodash';
+import { evaluate, derivative, parse, simplify, rationalize } from 'mathjs';
+import { isNil, isEmpty } from 'lodash';
 import { RichEmbed } from 'discord.js';
 import * as math from 'mathjs';
 
@@ -52,13 +52,23 @@ export class MathHandler extends BaseHandler {
       case 'simplify': {
         const expression = rest.join(' ');
         try {
-          response = simplify(expression).toString();
+          response = `Simplified expression: ${simplify(expression).toString()}`;
         } catch {
           response = 'Invalid expression.';
           break;
         }
         
         break;
+      }
+
+      case 'rationalize': {
+        const expression = rest.join(' ');
+        try {
+          response = `Rationalized expression: ${rationalize(expression).toString()}`;
+        } catch {
+          response = 'Invalid expression.';
+          break;
+        }
       }
 
       default: {
