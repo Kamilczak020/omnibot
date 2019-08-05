@@ -29,8 +29,11 @@ import { ReminderTask } from './task/reminderTask';
 
 import { ReactionHandler } from './reaction/reactionHandler';
 import { ChannelReactionWatcher } from './watcher/channelReactionWatcher';
+import { UserFeedWatcher } from './watcher/userFeedWatcher';
 import { UserFilter } from './filter/userFilter';
 import { CustomCommandParser } from './parser/customCommandParser';
+import { StatsHandler } from './handler/statsHandler';
+
 
 dotenv.config();
 
@@ -66,6 +69,7 @@ bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
 bot.registerService(CustomCommandHandler, 'handler', config.handlers.customCommandHandler);
 bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
 bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
+bot.registerService(StatsHandler, 'handler', config.handlers.statsHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
@@ -76,6 +80,7 @@ bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reaction
 
 // register watchers
 bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
+bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeedWatcher);
 
 // register tasks
 bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);

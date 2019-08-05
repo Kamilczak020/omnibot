@@ -14,10 +14,12 @@ export class Bot {
     this.incoming = new Subject();
     this.reactionAdd = new Subject();
     this.reactionRemove = new Subject();
+    this.userfeed = new Subject();
 
     this.reactionHandler;
     this.confessionHandler;
     this.channelReactionWatcher;
+    this.userFeedWatcher;
 
     this.parsers = [];
     this.handlers = [];
@@ -44,12 +46,16 @@ export class Bot {
     this.incoming.subscribe((next) => this.handleIncoming(next).catch(streamError));
     this.reactionAdd.subscribe((next) => this.handleMessageReactionAdd(next).catch(streamError));
     this.reactionRemove.subscribe((next) => this.handleMessageReactionRemove(next).catch(streamError));
+    this.userfeed.subscribe((next) => this.handleUserFeed(next).catch(streamError));
+
 
     this.client.on('raw', (packet) => this.raw.next(packet));
     this.client.on('ready', () => this.logger.debug('Discord listener is ready'));
     this.client.on('message', (input) => this.convertMessage(input).then((msg) => this.incoming.next(msg)));
     this.client.on('messageReactionAdd', (msgReaction, user) => this.reactionAdd.next({ msgReaction, user }));
     this.client.on('messageReactionRemove', (msgReaction, user) => this.reactionRemove.next({ msgReaction, user }));
+    this.client.on('guildMemberAdd', (guildMember) => this.userfeed.next({ guildMember, action: 'join' }));
+    this.client.on('guildMemberRemove', (guildMember) => this.userfeed.next({ guildMember, action: 'leave' }));
 
     await this.client.login(process.env.DISCORD_TOKEN);
     await this.client.user.setPresence({ game: { name: '!listcommands' }, status: 'online' });
@@ -68,12 +74,15 @@ export class Bot {
     this.incoming.complete();
     this.reactionAdd.complete();
     this.reactionRemove.complete();
+    this.userfeed.complete();
 
     this.client.removeAllListeners('raw');
     this.client.removeAllListeners('ready');
     this.client.removeAllListeners('message');
     this.client.removeAllListeners('messageReactionAdd');
     this.client.removeAllListeners('messageReactionRemove');
+    this.client.removeAllListeners('guildMemberAdd');
+    this.client.removeAllListeners('guildMemberRemove');
     await this.client.destroy();
   }
 
@@ -163,6 +172,11 @@ export class Bot {
     await this.reactionHandler.handle(reaction, 'remove');
   }
 
+  async handleUserFeed(feedData) {
+    const { guildMember, action } = feedData;
+    await this.userFeedWatcher.handleFeed(guildMember, action);
+  }
+
   /**
    * Converts the discord message to a message entity.
    * @param {*} msg message to convert
@@ -209,6 +223,9 @@ export class Bot {
         break;
       case 'channelReactionWatcher':
         this.channelReactionWatcher = service;
+        break;
+      case 'userFeedWatcher':
+        this.userFeedWatcher = service;
         break;
     }
 
