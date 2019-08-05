@@ -108,8 +108,9 @@ and adjust the values accordingly to match your cluster.
 17. **```!removecommand <name>```** -- [Staff only] Removes a command of a given name.
 19. **```!removereminder <index>```** -- Removes a reminder with a given index. You can see them by using !listreminders.
 19. **```!restart```** -- [Staff only] Forces the bot to stop and restart itself.
-20. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
-21. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
+20. **```!stats```** -- [Staff only] Displays server statistics.
+21. **```!unmute @username```** -- [Staff only] Unmutes a given user (if in voice chat).
+22. **```!warn @username reason```** -- [Staff only] Submits a warning for a user with a given reason. The user is sent the warning in DM.
 
 ## How to contribute
 If you would like to contribute to this project, please do so by submitting PRs to the gitlab repository:

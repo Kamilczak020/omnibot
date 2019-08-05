@@ -24,6 +24,7 @@ parsers:
       - 'removecommand'
       - 'removereminder'
       - 'restart'
+      - 'stats'
       - 'unmute'
       - 'warn'
   splitParser:
@@ -143,6 +144,9 @@ handlers:
       - name: 'restart'
         usage: '!restart'
         description: '[Staff only] Forces the bot to stop and restart itself.'
+      - name: 'stats'
+        usage: '!stats'
+        description: '[Staff only] Displays server statistics.'
       - name: 'unmute'
         usage: '!unmute @username'
         description: '[Staff only] Unmutes a given user (if in voice chat).'
@@ -177,6 +181,13 @@ handlers:
     roles:
       - 'Administrator'
       - 'Owner'
+  statsHandler:
+    name: 'statsHandler'
+    commands:
+      - 'stats'
+    roles:
+      - 'Administrator'
+      - 'Owner'
   urbanHandler:
     name: 'urbanHandler'
     commands: 
@@ -204,6 +215,11 @@ watchers:
         emojis:
           - '✅'
           - '❌'
+  userFeedWatcher:
+    name: 'userFeedWatcher'
+    channels:
+      join: '597706602920935428'
+      leave: '597706815773474836'
 
 filters:
   userFilter:
