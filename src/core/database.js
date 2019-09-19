@@ -6,6 +6,7 @@ import { CommandData } from '../model/commandData';
 import { CustomCommand } from '../model/customCommand';
 import { Warning } from '../model/warning';
 import { Reminder } from '../model/reminder';
+import { Birthday } from '../model/birthday';
 
 export function createDatabase() {
   const sequelize = new Sequelize({
@@ -19,6 +20,7 @@ export function createDatabase() {
   // Link models to database
   const models = {
     Message: Message.init(sequelize, Sequelize),
+    Birthday: Birthday.init(sequelize, Sequelize),
     Command: Command.init(sequelize, Sequelize),
     CommandData: CommandData.init(sequelize, Sequelize),
     CustomCommand: CustomCommand.init(sequelize, Sequelize),

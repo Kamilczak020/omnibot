@@ -39,11 +39,11 @@ handlers:
       - 'announce'
     groups:
       - type: 'regular'
-        role: '590113049889734667'
-        channel: '525686524944187392'
+        role: '592671098777108481'
+        channel: '592394347295670282'
       - type: 'twitch'
-        role: '590113143213260801'
-        channel: '591384965489491989'
+        role: '592672749969997824'
+        channel: '592394347295670282'
     roles:
       - 'Administrator'
       - 'Owner'

@@ -42,6 +42,16 @@ To do that, you can execute the included `init-db.sql` file (Postgres), by runni
 ```
 psql -h database_host -U database_username -d database_name -a -f init-db.sql
 ```
+Do the same for all migrations.
+
+For convenience, there is a ready bash script to handle it all. You can use it as follows:
+```
+sh apply-db.sh -h database_host -u database_username -d database_name [-m]
+```
+The `-m` flag is optional, and using it forces the script to only apply migrations, without the base db init.
+
+To use the script, you will require a `.pgpass` file with Postgres password available.
+
 
 Besides all of that, you also need an `.env` file, that is to be placed in the project root directory.
 Env variables required to run the bot are as following:
