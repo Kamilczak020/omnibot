@@ -55,6 +55,7 @@ bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
 bot.registerService(CustomCommandParser, 'parser', config.parsers.customCommandParser);
 
 // register handlers
+bot.registerService(BirthdayHandler, 'handler', config.handlers.birthdayHandler);
 bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
 bot.registerService(EchoHandler, 'handler', config.handlers.echoHandler);
 bot.registerService(HelpHandler, 'handler', config.handlers.helpHandler);
@@ -84,6 +85,7 @@ bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeed
 
 // register tasks
 bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
+bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
 
 if (process.argv[2] === 'sync') {
   try {
