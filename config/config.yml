@@ -6,6 +6,7 @@ parsers:
     name: 'echoParser'
     prefix: '!'
     commands:
+      - 'addbirthday'
       - 'addcommand'
       - 'addreminder'
       - 'announce'
@@ -21,6 +22,7 @@ parsers:
       - 'listwarnings'
       - 'math'
       - 'mute'
+      - 'removebirthday'
       - 'removecommand'
       - 'removereminder'
       - 'restart'
@@ -47,6 +49,13 @@ handlers:
     roles:
       - 'Administrator'
       - 'Owner'
+  birthdayHandler:
+    name: 'birthdayHandler'
+    commands:
+      - 'addbirthday'
+      - 'removebirthday'
+    guild: '525683090559991859'
+    role: '624168538818609152'
   chooseHandler:
     name: 'chooseHandler'
     commands:
