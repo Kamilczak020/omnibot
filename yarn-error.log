@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add --dev @types/bad-words
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add --dev @types/next-birthday
 
 PATH: 
-  C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Python27\;C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\windows-build-tools\node_modules\.bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\.bin;C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\DMIX;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Users\Kamil\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\Kamil\AppData\Local\atom\app-1.17.2\resources\cli;C:\Users\Kamil\AppData\Local\atom\app-1.19.0\resources\cli;C:\PostgreSQL\pg10\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\Yarn\bin\;C:\MinGW\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32;C:\sqlite;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Roaming\npm;C:\Users\Kamil\.dotnet\tools;C:\Users\Kamil\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\;C:\Users\Kamil\AppData\Roaming\npm\node_modules;C:\Program Files\Docker Toolbox;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Python27\;C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\windows-build-tools\node_modules\.bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\.bin;C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\DMIX;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Users\Kamil\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\Kamil\AppData\Local\atom\app-1.17.2\resources\cli;C:\Users\Kamil\AppData\Local\atom\app-1.19.0\resources\cli;C:\PostgreSQL\pg10\bin;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files (x86)\Yarn\bin\;C:\MinGW\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32;C:\sqlite;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\.dotnet\tools;C:\Users\Kamil\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\;C:\Users\Kamil\AppData\Roaming\npm\node_modules;C:\Program Files\Docker Toolbox;C:\Users\Kamil\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\
+  C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Python27\;C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\windows-build-tools\node_modules\.bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\.bin;C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\DMIX;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Users\Kamil\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\Kamil\AppData\Local\atom\app-1.17.2\resources\cli;C:\Users\Kamil\AppData\Local\atom\app-1.19.0\resources\cli;C:\PostgreSQL\pg10\bin;C:\Program Files\dotnet\;C:\Program Files (x86)\Yarn\bin\;C:\MinGW\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32;C:\sqlite;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Roaming\npm;C:\Users\Kamil\.dotnet\tools;C:\Users\Kamil\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\;C:\Users\Kamil\AppData\Roaming\npm\node_modules;C:\Program Files\Docker Toolbox;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\Kamil\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\Kamil\AppData\Local\Programs\Python\Python37-32\;C:\Python27\;C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\windows-build-tools\node_modules\.bin;C:\Users\Kamil\AppData\Roaming\npm\node_modules\.bin;C:\Users\Kamil\Desktop\cmder\bin;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu\Scripts;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5;C:\Users\Kamil\Desktop\cmder\vendor\conemu-maximus5\ConEmu;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\DMIX;c:\Program Files (x86)\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\Tools\Binn\;c:\Program Files\Microsoft SQL Server\110\DTS\Binn\;C:\Users\Kamil\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Users\Kamil\AppData\Local\atom\app-1.17.2\resources\cli;C:\Users\Kamil\AppData\Local\atom\app-1.19.0\resources\cli;C:\PostgreSQL\pg10\bin;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files (x86)\Yarn\bin\;C:\MinGW\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32;C:\sqlite;C:\Program Files\Git\cmd;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\Scripts\;C:\Users\Kamil\AppData\Local\Programs\Python\Python36-32\;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Kamil\.dotnet\tools;C:\Users\Kamil\AppData\Local\Yarn\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\;C:\Users\Kamil\AppData\Roaming\npm\node_modules;C:\Program Files\Docker Toolbox;C:\Users\Kamil\AppData\Roaming\npm;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\share\vim\vim74;C:\Users\Kamil\Desktop\cmder\
 
 Yarn version: 
   1.6.0
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fbad-words: Not found
+  Error: https://registry.yarnpkg.com/@types%2fnext-birthday: Not found
       at Request.params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:65327:18)
       at Request.self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:133155:22)
       at Request.emit (events.js:189:13)
@@ -75,7 +75,6 @@ npm manifest:
       "@babel/polyfill": "^7.4.4",
       "axios": "^0.19.0",
       "babel-polyfill": "^6.26.0",
-      "bad-words": "^3.0.2",
       "bunyan": "^1.8.12",
       "chrono-node": "^1.3.11",
       "date-fns": "^1.30.1",
@@ -84,6 +83,8 @@ npm manifest:
       "express": "^4.17.1",
       "js-yaml": "^3.13.1",
       "lodash": "^4.17.11",
+      "mathjs": "^6.0.3",
+      "next-birthday": "^1.0.0",
       "pg": "^7.11.0",
       "pg-hstore": "^2.3.2",
       "rxjs": "^6.5.2",
@@ -994,16 +995,6 @@ Lockfile:
       async-settle "^1.0.0"
       now-and-later "^2.0.0"
   
-  bad-words@^3.0.2:
-    version "3.0.2"
-    resolved "https://registry.yarnpkg.com/bad-words/-/bad-words-3.0.2.tgz#866de8f4be545eaea073a1e47d9ff67d3bb402ee"
-    dependencies:
-      badwords-list "^1.0.0"
-  
-  badwords-list@^1.0.0:
-    version "1.0.0"
-    resolved "https://registry.yarnpkg.com/badwords-list/-/badwords-list-1.0.0.tgz#5e9856dbf13482a295c3b0b304afb9d4cfc5c579"
-  
   balanced-match@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
@@ -1316,6 +1307,10 @@ Lockfile:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/commondir/-/commondir-1.0.1.tgz#ddd800da0c66127393cca5950ea968a3aaf1253b"
   
+  complex.js@2.0.11:
+    version "2.0.11"
+    resolved "https://registry.yarnpkg.com/complex.js/-/complex.js-2.0.11.tgz#09a873fbf15ffd8c18c9c2201ccef425c32b8bf1"
+  
   component-emitter@^1.2.1:
     version "1.3.0"
     resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
@@ -1497,6 +1492,10 @@ Lockfile:
   decamelize@^1.1.1, decamelize@^1.2.0:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
+  
+  decimal.js@10.2.0:
+    version "10.2.0"
+    resolved "https://registry.yarnpkg.com/decimal.js/-/decimal.js-10.2.0.tgz#39466113a9e036111d02f82489b5fd6b0b5ed231"
   
   decode-uri-component@^0.2.0:
     version "0.2.0"
@@ -1739,6 +1738,10 @@ Lockfile:
   escape-html@~1.0.3:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
+  
+  escape-latex@1.2.0:
+    version "1.2.0"
+    resolved "https://registry.yarnpkg.com/escape-latex/-/escape-latex-1.2.0.tgz#07c03818cf7dac250cce517f4fda1b001ef2bca1"
   
   escape-string-regexp@1.0.5, escape-string-regexp@^1.0.5:
     version "1.0.5"
@@ -2036,6 +2039,10 @@ Lockfile:
   forwarded@~0.1.2:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
+  
+  fraction.js@4.0.12:
+    version "4.0.12"
+    resolved "https://registry.yarnpkg.com/fraction.js/-/fraction.js-4.0.12.tgz#0526d47c65a5fb4854df78bc77f7bec708d7b8c3"
   
   fragment-cache@^0.2.1:
     version "0.2.1"
@@ -2770,6 +2777,10 @@ Lockfile:
     dependencies:
       handlebars "^4.1.2"
   
+  javascript-natural-sort@0.7.1:
+    version "0.7.1"
+    resolved "https://registry.yarnpkg.com/javascript-natural-sort/-/javascript-natural-sort-0.7.1.tgz#f9e2303d4507f6d74355a73664d1440fb5a0ef59"
+  
   js-levenshtein@^1.1.3:
     version "1.1.6"
     resolved "https://registry.yarnpkg.com/js-levenshtein/-/js-levenshtein-1.1.6.tgz#c6cee58eb3550372df8deb85fad5ce66ce01d59d"
@@ -2878,6 +2889,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/lead/-/lead-1.0.0.tgz#6f14f99a37be3a9dd784f5495690e5903466ee42"
     dependencies:
       flush-write-stream "^1.0.2"
+  
+  leap-year@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/leap-year/-/leap-year-1.0.0.tgz#014b4e8a99a17bcad2570f19a83c43782c5cc38e"
   
   liftoff@^3.1.0:
     version "3.1.0"
@@ -3014,6 +3029,19 @@ Lockfile:
   math-random@^1.0.1:
     version "1.0.4"
     resolved "https://registry.yarnpkg.com/math-random/-/math-random-1.0.4.tgz#5dd6943c938548267016d4e34f057583080c514c"
+  
+  mathjs@^6.0.3:
+    version "6.0.3"
+    resolved "https://registry.yarnpkg.com/mathjs/-/mathjs-6.0.3.tgz#3d9e4a8ace012fa3c2078bb3ca1237374fa03136"
+    dependencies:
+      complex.js "2.0.11"
+      decimal.js "10.2.0"
+      escape-latex "1.2.0"
+      fraction.js "4.0.12"
+      javascript-natural-sort "0.7.1"
+      seed-random "2.2.0"
+      tiny-emitter "2.1.0"
+      typed-function "1.1.0"
   
   media-typer@0.3.0:
     version "0.3.0"
@@ -3257,6 +3285,12 @@ Lockfile:
   nested-error-stacks@^2.0.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
+  
+  next-birthday@^1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/next-birthday/-/next-birthday-1.0.0.tgz#2f323a456ebef692e617a4f4fd21fb4c2582f5d0"
+    dependencies:
+      leap-year "^1.0.0"
   
   next-tick@1, next-tick@^1.0.0:
     version "1.0.0"
@@ -4167,6 +4201,10 @@ Lockfile:
     version "1.2.4"
     resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
   
+  seed-random@2.2.0:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/seed-random/-/seed-random-2.2.0.tgz#2a9b19e250a817099231a5b99a4daf80b7fbed54"
+  
   semver-greatest-satisfied-range@^1.1.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/semver-greatest-satisfied-range/-/semver-greatest-satisfied-range-1.1.0.tgz#13e8c2658ab9691cb0cd71093240280d36f77a5b"
@@ -4612,6 +4650,10 @@ Lockfile:
       es5-ext "~0.10.46"
       next-tick "1"
   
+  tiny-emitter@2.1.0:
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz#1d1a56edfc51c43e863cbb5382a72330e3555423"
+  
   to-absolute-glob@^2.0.0:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/to-absolute-glob/-/to-absolute-glob-2.0.2.tgz#1865f43d9e74b0822db9f145b78cff7d0f7c849b"
@@ -4685,6 +4727,10 @@ Lockfile:
     dependencies:
       media-typer "0.3.0"
       mime-types "~2.1.24"
+  
+  typed-function@1.1.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/typed-function/-/typed-function-1.1.0.tgz#ea149706e0fb42aca1791c053a6d94ccd6c4fdcb"
   
   typedarray@^0.0.6:
     version "0.0.6"

@@ -5,10 +5,10 @@ import { RichEmbed } from 'discord.js';
 
 export class StatsHandler extends BaseHandler {
   async handle(cmd) {
-    const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId }});
+    const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId } });
     const channel = message.dataValues.channel;
     const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
-    
+
     const embed = new RichEmbed({
       title: `**Alaska Server Stats**`,
       color: 0xFF6F61,

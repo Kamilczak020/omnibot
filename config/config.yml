@@ -26,6 +26,7 @@ parsers:
       - 'removecommand'
       - 'removereminder'
       - 'restart'
+      - 's'
       - 'stats'
       - 'unmute'
       - 'warn'
@@ -88,6 +89,7 @@ handlers:
       - 'delete'
     roles:
       - 'Administrator'
+      - 'Moderator'
       - 'Owner'
   echoHandler:
     name: 'echoHandler'
@@ -190,6 +192,13 @@ handlers:
     roles:
       - 'Administrator'
       - 'Owner'
+  sedHandler:
+    name: 'sedHandler'
+    ignore: 
+      - '580365552950706177'
+      - '591273465689145355'
+    commands:
+      - 's'
   statsHandler:
     name: 'statsHandler'
     commands:
@@ -235,6 +244,7 @@ filters:
     name: 'userFilter'
     users:
       - '580365552950706177'
+      - '591273465689145355'
   badWordFilter:
     name: 'badWordFilter'
     filteredWords:

@@ -33,6 +33,7 @@ import { UserFeedWatcher } from './watcher/userFeedWatcher';
 import { UserFilter } from './filter/userFilter';
 import { CustomCommandParser } from './parser/customCommandParser';
 import { StatsHandler } from './handler/statsHandler';
+import { SedHandler } from './handler/sedHandler';
 
 
 dotenv.config();
@@ -55,7 +56,7 @@ bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
 bot.registerService(CustomCommandParser, 'parser', config.parsers.customCommandParser);
 
 // register handlers
-bot.registerService(BirthdayHandler, 'handler', config.handlers.birthdayHandler);
+// bot.registerService(BirthdayHandler, 'handler', config.handlers.birthdayHandler);
 bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
 bot.registerService(EchoHandler, 'handler', config.handlers.echoHandler);
 bot.registerService(HelpHandler, 'handler', config.handlers.helpHandler);
@@ -71,6 +72,7 @@ bot.registerService(CustomCommandHandler, 'handler', config.handlers.customComma
 bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
 bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
 bot.registerService(StatsHandler, 'handler', config.handlers.statsHandler);
+bot.registerService(SedHandler, 'handler', config.handlers.sedHandler);
 
 // register filters
 bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
@@ -85,11 +87,11 @@ bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeed
 
 // register tasks
 bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
-bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
+// bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
 
 if (process.argv[2] === 'sync') {
   try {
-    database.sequelize.sync(); 
+    database.sequelize.sync();
   } catch (err) {
     logger.error(err);
   }
