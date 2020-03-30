@@ -14,7 +14,7 @@ export class UserActionHandler extends BaseHandler {
     const channel = message.dataValues.channel;
 
     const target = body.split(' ')[0];
-    this.getUserFromTarget(target);
+    await this.getUserFromTarget(target);
 
     return;
 
