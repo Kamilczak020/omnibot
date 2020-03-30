@@ -14,7 +14,12 @@ export class UserActionHandler extends BaseHandler {
     const channel = message.dataValues.channel;
 
     const target = body.split(' ')[0];
-    await this.getUserFromTarget(target);
+
+    try {
+      await this.getUserFromTarget(target, message.dataValues.guild, channel);
+    } catch (error) {
+      this.logger.debug(error);
+    }
 
     return;
 
@@ -122,7 +127,7 @@ export class UserActionHandler extends BaseHandler {
     return await this.replyToChannel(channel, response);
   }
 
-  async getUserFromTarget(target) {
+  async getUserFromTarget(target, guildId, channel) {
     const isTargetUserId = /^[0-9]*$/.test(target);
     if (isTargetUserId) {
       const user = await this.client.fetchUser(target);
@@ -137,14 +142,19 @@ export class UserActionHandler extends BaseHandler {
     }
 
     // Name matching only works for guild members!
-    const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
-    const usernames = guild.members.map((member) => member.user.username);
-    const nicknames = guild.members.map((member) => member.nickname);
+    const guild = this.client.guilds.find((guild) => guild.id === guildId);
+    const usernames = guild.members.map((member) => member.user.username).filter((x) => !isNil(x));
+    const nicknames = guild.members.map((member) => member.nickname).filter((x) => !isNil(x));
+
     const userset = fuzzyset([...usernames, ...nicknames], true);
     const matches = userset.get(target);
 
+    if (matches.length === 0) {
+      return await this.replyToChannel(channel, 'No matches found.');
+    }
+
     const embed = new RichEmbed({
-      title: `Warnings for user: ${user.username}`,
+      title: `Matched Usernames/Nicknames`,
       color: 0xFF6F61,
       fields: matches.map((match) => ({
         name: `Levenshtein Distance: ${match[0]}`,
