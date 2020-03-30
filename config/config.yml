@@ -6,7 +6,6 @@ parsers:
     name: 'echoParser'
     prefix: '!'
     commands:
-      - 'addbirthday'
       - 'addcommand'
       - 'addreminder'
       - 'announce'
@@ -22,7 +21,6 @@ parsers:
       - 'listwarnings'
       - 'math'
       - 'mute'
-      - 'removebirthday'
       - 'removecommand'
       - 'removereminder'
       - 'restart'
@@ -42,21 +40,14 @@ handlers:
       - 'announce'
     groups:
       - type: 'regular'
-        role: '592671098777108481'
-        channel: '592394347295670282'
+        role: '590113049889734667'
+        channel: '525686524944187392'
       - type: 'twitch'
-        role: '592672749969997824'
-        channel: '592394347295670282'
+        role: '590113143213260801'
+        channel: '591384965489491989'
     roles:
       - 'Administrator'
       - 'Owner'
-  birthdayHandler:
-    name: 'birthdayHandler'
-    commands:
-      - 'addbirthday'
-      - 'removebirthday'
-    guild: '525683090559991859'
-    role: '624168538818609152'
   chooseHandler:
     name: 'chooseHandler'
     commands:

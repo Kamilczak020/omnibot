@@ -1,4 +1,5 @@
 'use strict';
+import fuzzyset from 'fuzzyset.js';
 import { BaseHandler } from './baseHandler';
 import { Message } from '../model/message';
 import { Warning } from '../model/warning';
@@ -9,8 +10,13 @@ export class UserActionHandler extends BaseHandler {
   async handle(cmd) {
     const command = cmd.dataValues.name;
     const body = await this.getData(cmd, 'body');
-    const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId }});
+    const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId } });
     const channel = message.dataValues.channel;
+
+    const target = body.split(' ')[0];
+    this.getUserFromTarget(target);
+
+    return;
 
     const userRegex = /<@\!?(\d*)>/g;
     const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
@@ -34,7 +40,7 @@ export class UserActionHandler extends BaseHandler {
 
     let response;
     switch (command) {
-      case 'kick': 
+      case 'kick':
         if (!member.kickable) {
           response = 'User cannot be kicked.';
           break;
@@ -43,7 +49,7 @@ export class UserActionHandler extends BaseHandler {
         response = 'User kicked successfully.';
         break;
 
-      case 'ban': 
+      case 'ban':
         if (!member.bannable) {
           response = 'User cannot be banned.';
           break;
@@ -77,7 +83,7 @@ export class UserActionHandler extends BaseHandler {
       }
 
       case 'warn': {
-        const warningCount = await Warning.count({ where: { 'member': user.id }});
+        const warningCount = await Warning.count({ where: { 'member': user.id } });
         const warning = await new Warning({ member: user.id, message: body.split(' ').slice(1).join(' ') });
         await warning.save();
         const dmChannel = user.dmChannel ? user.dmChannel : await user.createDM();
@@ -86,7 +92,7 @@ export class UserActionHandler extends BaseHandler {
           color: 0xFF6F61,
           description: `Reason: ${body.split(' ').slice(1).join(' ')}`
         });
-        
+
         await dmChannel.send('**This is a warning!**', embed);
         response = 'User has been warned.';
         break;
@@ -98,7 +104,7 @@ export class UserActionHandler extends BaseHandler {
           break;
         }
 
-        const warnings = await Warning.findAll({ where: { 'member': user.id }});
+        const warnings = await Warning.findAll({ where: { 'member': user.id } });
         const queryer = await this.client.fetchUser(message.dataValues.author);
         const dmChannel = queryer.dmChannel ? queryer.dmChannel : await queryer.createDM();
         const embed = new RichEmbed({
@@ -114,5 +120,38 @@ export class UserActionHandler extends BaseHandler {
     }
 
     return await this.replyToChannel(channel, response);
+  }
+
+  async getUserFromTarget(target) {
+    const isTargetUserId = /^[0-9]*$/.test(target);
+    if (isTargetUserId) {
+      const user = await this.client.fetchUser(target);
+      return await this.replyToChannel(channel, `The princess you are looking for is ${user.username}`);
+    }
+
+    const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
+    const isTargetConfessionId = confessionRegex.test(target);
+    if (isTargetConfessionId) {
+      const confession = this.store.confessions.find((confession) => confession.id = target);
+      return await this.replyToChannel(channel, 'Nuh uh. Confessions disabled for testing.');
+    }
+
+    // Name matching only works for guild members!
+    const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
+    const usernames = guild.members.map((member) => member.user.username);
+    const nicknames = guild.members.map((member) => member.nickname);
+    const userset = fuzzyset([...usernames, ...nicknames], true);
+    const matches = userset.get(target);
+
+    const embed = new RichEmbed({
+      title: `Warnings for user: ${user.username}`,
+      color: 0xFF6F61,
+      fields: matches.map((match) => ({
+        name: `Levenshtein Distance: ${match[0]}`,
+        value: match[1],
+      }))
+    });
+
+    return await this.replyToChannel(channel, embed);
   }
 }
