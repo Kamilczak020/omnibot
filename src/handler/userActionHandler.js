@@ -12,54 +12,49 @@ export class UserActionHandler extends BaseHandler {
     const body = await this.getData(cmd, 'body');
     const message = await Message.findOne({ where: { id: cmd.dataValues.MessageId } });
     const channel = message.dataValues.channel;
-
-    const target = body.split(' ')[0];
-    this.getUserFromTarget(target);
-
-    return;
-
-    const userRegex = /<@\!?(\d*)>/g;
-    const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
-    const matchedUser = userRegex.exec(body.split(' ')[0]);
-    const matchedConfession = confessionRegex.exec(body.split(' ')[0]);
-    if (isNil(matchedUser) && isNil(matchedConfession)) {
-      return await this.replyToChannel(channel, 'User / Confession was not found.');
-    }
-
-    const potentialUser = matchedUser ? this.client.users.find((user) => user.id === matchedUser[1]) : null;
-    const potentialConfession = matchedConfession ? this.store.confessions.find((confession) => confession.id === matchedConfession[0]) : null;
-    if (isNil(potentialUser) && isNil(potentialConfession)) {
-      return await this.replyToChannel(channel, 'User / Confession was not found.');
-    }
-
-    const isConfession = !isNil(potentialConfession);
-    const user = potentialUser ? potentialUser : this.client.users.find((user) => user.id === potentialConfession.author);
     const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
-    const member = await guild.fetchMember(user);
+
+    // Gets us anything before "", which should be a start of a message (in case of warning).
+    // Potential pitfall is when a user has " in their username.
+    const target = /[^"]*/.exec(body)[0].trim();
+    const user = await this.getUserFromTarget(target, guild);
+
+    if (isNil(user)) {
+      return await this.replyToChannel(channel, 'User / Confession was not found. Please check or narrow down your expression.');
+    }
+
+    const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
+    const isTargetConfessionId = confessionRegex.test(target);
+
     const muteRole = guild.roles.find((guildRole) => guildRole.id === this.options.muteRole);
+    const member = await guild.fetchMember(user);
 
     let response;
     switch (command) {
-      case 'kick':
-        if (!member.kickable) {
-          response = 'User cannot be kicked.';
+      case 'kick': {
+        if (!isNil(member) && member.kickable) {
+          await member.kick();
+          response = 'Badaboing! User kicked successfully.';
           break;
         }
-        await member.kick();
-        response = 'User kicked successfully.';
-        break;
 
-      case 'ban':
-        if (!member.bannable) {
-          response = 'User cannot be banned.';
+        response = 'User cannot be kicked.';
+        break;
+      }
+
+      case 'ban': {
+        if (!isNil(member) && member.bannable) {
+          await member.ban();
+          response = 'Boom! User banned successfully.';
           break;
         }
-        await member.ban();
-        response = 'User banned successfully.';
+
+        response = 'User cannot be banned.';
         break;
+      }
 
       case 'mute': {
-        if (isConfession) {
+        if (isNil(member) || isTargetConfessionId) {
           response = 'Cannot mute a confession submitter.';
           break;
         }
@@ -71,7 +66,7 @@ export class UserActionHandler extends BaseHandler {
       }
 
       case 'unmute': {
-        if (isConfession) {
+        if (isNil(member) || isTargetConfessionId) {
           response = 'Cannot unmute a confession submitter.';
           break;
         }
@@ -83,9 +78,17 @@ export class UserActionHandler extends BaseHandler {
       }
 
       case 'warn': {
+        if (isNil(member)) {
+          response = 'User is not a guild member.';
+          break;
+        }
+
         const warningCount = await Warning.count({ where: { 'member': user.id } });
-        const warning = await new Warning({ member: user.id, message: body.split(' ').slice(1).join(' ') });
+        const warningRegex = /".*"/;
+        const warningMessage = warningRegex.exec(body)[0].trim();
+        const warning = new Warning({ member: user.id, message: warningMessage });
         await warning.save();
+
         const dmChannel = user.dmChannel ? user.dmChannel : await user.createDM();
         const embed = new RichEmbed({
           title: `Warning #${warningCount + 1} from Alaska Discord Server`,
@@ -97,61 +100,56 @@ export class UserActionHandler extends BaseHandler {
         response = 'User has been warned.';
         break;
       }
-
-      case 'listwarnings': {
-        if (isConfession) {
-          response = 'Cannot list warnings using ConfessionID.';
-          break;
-        }
-
-        const warnings = await Warning.findAll({ where: { 'member': user.id } });
-        const queryer = await this.client.fetchUser(message.dataValues.author);
-        const dmChannel = queryer.dmChannel ? queryer.dmChannel : await queryer.createDM();
-        const embed = new RichEmbed({
-          title: `Warnings for user: ${user.username}`,
-          color: 0xFF6F61,
-          description: warnings.map((warning) => `[${warning.dataValues.createdAt}]\n${warning.dataValues.message}`).join('\n\n')
-        });
-
-        await dmChannel.send('This is a list of warnings.', embed);
-        response = 'Sending a list of warnings in DM.';
-        break;
-      }
     }
 
     return await this.replyToChannel(channel, response);
   }
 
-  async getUserFromTarget(target) {
+  async getUserFromTarget(target, guild) {
     const isTargetUserId = /^[0-9]*$/.test(target);
     if (isTargetUserId) {
-      const user = await this.client.fetchUser(target);
-      return await this.replyToChannel(channel, `The princess you are looking for is ${user.username}`);
+      return await this.client.fetchUser(target);
     }
 
     const confessionRegex = /[0-9a-f]{8}\-[0-9a-f]{4}\-4[0-9a-f]{3}\-[89ab][0-9a-f]{3}\-[0-9a-f]{12}/i;
     const isTargetConfessionId = confessionRegex.test(target);
     if (isTargetConfessionId) {
       const confession = this.store.confessions.find((confession) => confession.id = target);
-      return await this.replyToChannel(channel, 'Nuh uh. Confessions disabled for testing.');
+      return await this.client.fetchUser(confession.author);
     }
 
     // Name matching only works for guild members!
-    const guild = this.client.guilds.find((guild) => guild.id === message.dataValues.guild);
-    const usernames = guild.members.map((member) => member.user.username);
-    const nicknames = guild.members.map((member) => member.nickname);
+    const usernames = guild.members.map((member) => member.user.username).filter((x) => !isNil(x));
+    const nicknames = guild.members.map((member) => member.nickname).filter((x) => !isNil(x));
     const userset = fuzzyset([...usernames, ...nicknames], true);
-    const matches = userset.get(target);
+    const matches = userset.get(target).map((match) => ({ score: match[0], name: match[1] }));
 
-    const embed = new RichEmbed({
-      title: `Warnings for user: ${user.username}`,
-      color: 0xFF6F61,
-      fields: matches.map((match) => ({
-        name: `Levenshtein Distance: ${match[0]}`,
-        value: match[1],
-      }))
-    });
+    if (matches.length === 0) {
+      return;
+    }
 
-    return await this.replyToChannel(channel, embed);
+    if (matches.length === 1) {
+      return guild.members.find((x) => x.nickname === matches[0].name || x.user.username === matches[0].name).user;
+    }
+
+    // 0.7 was found to be a decent matching treshold when unsing levenshtein disance fuzzy matching.
+    // Might need readjustment in the future, but seems fine on a wide array of tested values.
+    if (matches[0].score < 0.7) {
+      return;
+    }
+
+    // First two matches can both be for the same user. Make sure to disregard that in match closeness comparison.
+    // Since both top matches are for the same user, we can disregard the case of a 'accidental mismatch' and just
+    // assume the correct user was selected.
+    const userA = guild.members.find((x) => x.nickname === matches[0].name || x.user.username === matches[0].name).user;
+    const userB = guild.members.find((x) => x.nickname === matches[1].name || x.user.username === matches[1].name).user;
+
+    if (userA.id === userB.id) {
+      return userA;
+    }
+
+    if (matches[0].score - matches[1].score > 0.07) {
+      return userA;
+    }
   }
 }
