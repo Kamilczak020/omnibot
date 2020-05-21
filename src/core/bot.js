@@ -104,8 +104,10 @@ export class Bot {
       return await this.confessionHandler.handle(msg);
     }
 
-    await this.channelReactionWatcher.react(msg);
+    this.channelReactionWatcher.react(msg);
     // await this.autocannonWatcher.react(msg);
+
+    this.logger.debug(msg.dataValues.body);
 
     this.parsers.forEach(async (parser) => {
       if (await parser.check(msg)) {
@@ -130,6 +132,8 @@ export class Bot {
  * @param {*} cmd command to handle
  */
   async handleCommand(cmd) {
+    this.logger.debug({ cmd }, 'Handling command');
+
     this.handlers.forEach(async (handler) => {
       if (await handler.check(cmd)) {
         try {
