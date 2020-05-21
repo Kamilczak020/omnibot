@@ -112,6 +112,7 @@ export class Bot {
         try {
           await msg.save();
           const command = await parser.parse(msg);
+          this.logger.info(JSON.stringify(command));
           this.commands.next(command);
           return;
         } catch (err) {
