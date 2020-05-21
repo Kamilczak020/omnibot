@@ -105,7 +105,7 @@ export class Bot {
     }
 
     await this.channelReactionWatcher.react(msg);
-    await this.autocannonWatcher.react(msg);
+    // await this.autocannonWatcher.react(msg);
 
     this.parsers.forEach(async (parser) => {
       if (await parser.check(msg)) {
