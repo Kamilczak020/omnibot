@@ -87,7 +87,7 @@ bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reaction
 // register watchers
 bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
 bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeedWatcher);
-bot.registerService(AutocannonWatcher, 'autocannonWatcher', config.watcher.autocannonWatcher);
+bot.registerService(AutocannonWatcher, 'autocannonWatcher', config.watchers.autocannonWatcher);
 
 // register tasks
 bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
