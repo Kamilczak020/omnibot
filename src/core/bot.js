@@ -105,26 +105,27 @@ export class Bot {
     }
 
     this.channelReactionWatcher.react(msg);
-    // await this.autocannonWatcher.react(msg);
+    this.autocannonWatcher.react(msg);
 
     this.logger.debug(msg.dataValues.body);
 
-    this.parsers.forEach(async (parser) => {
-      if (await parser.check(msg)) {
+    for (const parser of this.parsers) {
+      const parserCheck = await parser.check(msg);
+      if (parserCheck) {
         try {
           await msg.save();
           const command = await parser.parse(msg);
-          this.logger.info('what the fuck bro');
+          this.logger.info({ msg }, 'Message was parsed successfully.');
           this.commands.next(command);
           return;
-        } catch (err) {
-          console.log(err);
-          this.logger.error('Parser failed to parse the message');
+        } catch (error) {
+          this.logger.error({ error }, 'Parser failed to parse the message');
+          return;
         }
       }
-    });
 
-    this.logger.debug({ msg }, 'Message did not produce any commands');
+      this.logger.debug({ msg }, 'Message did not produce any commands');
+    }
   }
 
   /**
