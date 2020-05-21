@@ -8,10 +8,7 @@ export class BaseParser extends BaseService {
     const cmd = mustExist(msg.dataValues.body.split(' ')[0]);
     this.logger.debug('command parsed:', cmd);
 
-    const checkResult = cmd.startsWith(this.options.prefix) && includes(this.options.commands, this.stripPrefix(cmd));
-    this.logger.debug(`Parser check result: ${checkResult}`);
-
-    return checkResult;
+    return cmd.startsWith(this.options.prefix) && includes(this.options.commands, this.stripPrefix(cmd));
   }
 
   stripPrefix(cmd) {
