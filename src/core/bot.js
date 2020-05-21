@@ -112,10 +112,11 @@ export class Bot {
     for (const parser of this.parsers) {
       const parserCheck = await parser.check(msg);
       if (parserCheck) {
+        this.logger.info({ msg }, 'Message was parsed successfully.');
+
         try {
           await msg.save();
           const command = await parser.parse(msg);
-          this.logger.info({ msg }, 'Message was parsed successfully.');
           this.commands.next(command);
           return;
         } catch (error) {

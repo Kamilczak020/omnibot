@@ -7,9 +7,11 @@ export class BaseParser extends BaseService {
   async check(msg) {
     const cmd = mustExist(msg.dataValues.body.split(' ')[0]);
     this.logger.debug('command parsed:', cmd);
-    this.logger.debug('Does this even reach?', cmd);
 
-    return cmd.startsWith(this.options.prefix) && includes(this.options.commands, this.stripPrefix(cmd));
+    const checkResult = cmd.startsWith(this.options.prefix) && includes(this.options.commands, this.stripPrefix(cmd));
+    this.logger.debug(`Parser check result: ${checkResult}`);
+
+    return checkResult;
   }
 
   stripPrefix(cmd) {
