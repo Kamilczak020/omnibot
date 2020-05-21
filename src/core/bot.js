@@ -19,6 +19,7 @@ export class Bot {
     this.reactionHandler;
     this.confessionHandler;
     this.channelReactionWatcher;
+    this.autocannonWatcher;
     this.userFeedWatcher;
 
     this.parsers = [];
@@ -104,6 +105,7 @@ export class Bot {
     }
 
     this.channelReactionWatcher.react(msg);
+    this.autocannonWatcher.react(msg);
 
     this.parsers.forEach(async (parser) => {
       if (await parser.check(msg)) {
@@ -122,10 +124,10 @@ export class Bot {
     this.logger.debug({ msg }, 'Message did not produce any commands');
   }
 
-    /**
-   * Runs the message through handlers.
-   * @param {*} cmd command to handle
-   */
+  /**
+ * Runs the message through handlers.
+ * @param {*} cmd command to handle
+ */
   async handleCommand(cmd) {
     this.handlers.forEach(async (handler) => {
       if (await handler.check(cmd)) {
@@ -202,7 +204,7 @@ export class Bot {
    */
   registerService(serviceDefinition, serviceType, options) {
     const service = new serviceDefinition(this.client, this.logger, this.dataStore, options);
-    switch(serviceType) {
+    switch (serviceType) {
       case 'parser':
         this.parsers.push(service);
         break;
@@ -212,7 +214,7 @@ export class Bot {
       case 'filter':
         this.filters.push(service);
         break;
-      case 'task': 
+      case 'task':
         this.tasks.push(service);
         break;
       case 'reactionHandler':
@@ -223,6 +225,9 @@ export class Bot {
         break;
       case 'channelReactionWatcher':
         this.channelReactionWatcher = service;
+        break;
+      case 'autocannonWatcher':
+        this.autocannonWatcher = service;
         break;
       case 'userFeedWatcher':
         this.userFeedWatcher = service;
