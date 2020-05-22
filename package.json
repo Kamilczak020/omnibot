@@ -1,7 +1,7 @@
 {
   "name": "omnibot",
   "version": "1.0.0",
-  "description": "A discord bot for the RL Duels discord server",
+  "description": "A discord bot for the Alaska discord server",
   "main": "index.js",
   "repository": "https://github.com/Kamilczak020/Omnibot",
   "author": "Kamil Solecki <kamilczak020@gmail.com>",

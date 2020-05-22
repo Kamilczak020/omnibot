@@ -46,7 +46,7 @@ const bot = new Bot(logger);
 
 database.sequelize.authenticate()
   .then(() => {
-    console.log('Initializing bot modules..\n');
+    logger.info('Initializing bot modules..\n');
     console.log('Initializing bot modules..\n');
     loadBot();
   })
