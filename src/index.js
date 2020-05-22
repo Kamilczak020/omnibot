@@ -38,70 +38,67 @@ import { SedHandler } from './handler/sedHandler';
 
 dotenv.config();
 
-async function start() {
-  const logger = createLogger();
-  const config = loadConfig('./build/config.yml');
-  const database = createDatabase();
-  const bot = new Bot(logger);
+const logger = createLogger();
+const config = loadConfig('./build/config.yml');
+const database = createDatabase();
+const bot = new Bot(logger);
 
-  process.on('exit', () => {
-    bot.stop();
-  });
-
-  logger.debug('Did this happen');
-
-  try {
-    await database.sequelize.authenticate();
-    logger.debug('Database connected.');
-  } catch (error) {
-    logger.debug({ error }, 'Database failed.');
+database.sequelize.authenticate().then((errors) => {
+  if (!isNil(errors)) {
+    logger.error({ errors }, 'Failed to connect to database');
     process.exit();
   }
+});
 
-  // register parsers
-  bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
-  bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
-  bot.registerService(CustomCommandParser, 'parser', config.parsers.customCommandParser);
+// register parsers
+bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
+bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
+bot.registerService(CustomCommandParser, 'parser', config.parsers.customCommandParser);
 
-  // register handlers
-  // bot.registerService(BirthdayHandler, 'handler', config.handlers.birthdayHandler);
-  bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
-  bot.registerService(EchoHandler, 'handler', config.handlers.echoHandler);
-  bot.registerService(HelpHandler, 'handler', config.handlers.helpHandler);
-  bot.registerService(RestartHandler, 'handler', config.handlers.restartHandler);
-  bot.registerService(UserActionHandler, 'handler', config.handlers.userActionHandler);
-  bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
-  bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
-  bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
-  bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
-  bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.confessionHandler);
-  bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
-  bot.registerService(CustomCommandHandler, 'handler', config.handlers.customCommandHandler);
-  bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
-  bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
-  bot.registerService(StatsHandler, 'handler', config.handlers.statsHandler);
-  bot.registerService(SedHandler, 'handler', config.handlers.sedHandler);
+// register handlers
+// bot.registerService(BirthdayHandler, 'handler', config.handlers.birthdayHandler);
+bot.registerService(ChooseHandler, 'handler', config.handlers.chooseHandler);
+bot.registerService(EchoHandler, 'handler', config.handlers.echoHandler);
+bot.registerService(HelpHandler, 'handler', config.handlers.helpHandler);
+bot.registerService(RestartHandler, 'handler', config.handlers.restartHandler);
+bot.registerService(UserActionHandler, 'handler', config.handlers.userActionHandler);
+bot.registerService(UrbanHandler, 'handler', config.handlers.urbanHandler);
+bot.registerService(DefineHandler, 'handler', config.handlers.defineHandler);
+bot.registerService(AnnouncementHandler, 'handler', config.handlers.announcementHandler);
+bot.registerService(RemindmeHandler, 'handler', config.handlers.remindmeHandler);
+bot.registerService(ConfessionHandler, 'confessionHandler', config.handlers.confessionHandler);
+bot.registerService(DeleteHandler, 'handler', config.handlers.deleteHandler);
+bot.registerService(CustomCommandHandler, 'handler', config.handlers.customCommandHandler);
+bot.registerService(CommandManagerHandler, 'handler', config.handlers.commandManagerHandler);
+bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
+bot.registerService(StatsHandler, 'handler', config.handlers.statsHandler);
+bot.registerService(SedHandler, 'handler', config.handlers.sedHandler);
 
-  // register filters
-  bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
-  bot.registerService(UserFilter, 'filter', config.filters.userFilter);
+// register filters
+bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
+bot.registerService(UserFilter, 'filter', config.filters.userFilter);
 
-  // register reaction handlers
-  bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reactionHandler);
+// register reaction handlers
+bot.registerService(ReactionHandler, 'reactionHandler', config.handlers.reactionHandler);
 
-  // register watchers
-  bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
-  bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeedWatcher);
+// register watchers
+bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
+bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeedWatcher);
 
-  // register tasks
-  bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
-  // bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
-  
+// register tasks
+bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
+// bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
+
+if (process.argv[2] === 'sync') {
   try {
-    await bot.start();
-  } catch (error) {
-    logger.error({ error }, 'Bot failed to start.');
+    database.sequelize.sync();
+  } catch (err) {
+    logger.error(err);
   }
 }
 
-start();
+process.on('exit', () => {
+  bot.stop();
+});
+
+bot.start();

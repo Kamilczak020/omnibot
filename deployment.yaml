@@ -21,8 +21,6 @@ spec:
         image: greenchill/omnibot:master
         imagePullPolicy: Always
         env:
-        - name: DEBUG
-          value: "*"
         - name: DISCORD_TOKEN
           valueFrom:
             secretKeyRef:
