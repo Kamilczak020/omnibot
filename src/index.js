@@ -43,12 +43,16 @@ const config = loadConfig('./build/config.yml');
 const database = createDatabase();
 const bot = new Bot(logger);
 
-database.sequelize.authenticate().then((errors) => {
-  if (!isNil(errors)) {
-    logger.error({ errors }, 'Failed to connect to database');
-    process.exit();
-  }
+console.log('MAYBE HERE 1');
+
+database.sequelize.authenticate().catch((errors) => {
+  console.log('MAYBE HERE 2');
+  logger.error({ errors }, 'Failed to connect to database');
+  process.exit();
 });
+
+console.log('MAYBE HERE 3');
+
 
 // register parsers
 bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
