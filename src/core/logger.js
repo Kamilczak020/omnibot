@@ -3,7 +3,7 @@ import * as bunyan from 'bunyan';
 
 export function createLogger() {
   return bunyan.createLogger({
-    name: 'rlduels',
+    name: 'omnibot',
     streams: [{
       level: 'info',
       stream: process.stdout

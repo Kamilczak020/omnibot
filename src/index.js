@@ -46,11 +46,13 @@ const bot = new Bot(logger);
 
 database.sequelize.authenticate()
   .then(() => {
-    logger.info('Initializing bot modules..\n');
+    console.log('Initializing bot modules..\n');
+    console.log('Initializing bot modules..\n');
     loadBot();
   })
   .catch((error) => {
-    logger.error(`Failed to connect to database ${error}\n`);
+    console.log(`Failed to connect to database ${error}\n`);
+    console.log(`Failed to connect to database ${error}\n`);
   });
 
 async function loadBot() {
