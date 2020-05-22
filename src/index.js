@@ -48,11 +48,13 @@ async function start() {
     bot.stop();
   });
 
+  logger.debug('Did this happen');
+
   try {
     await database.sequelize.authenticate();
-    logger.info('Database connected.');
+    logger.debug('Database connected.');
   } catch (error) {
-    logger.error({ error }, 'Database failed.');
+    logger.debug({ error }, 'Database failed.');
     process.exit();
   }
 

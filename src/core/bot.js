@@ -29,6 +29,7 @@ export class Bot {
     this.dataStore = new DataStore();
 
     this.client = new Client();
+    this.logger.info('Bot created.');
   }
 
   /**
