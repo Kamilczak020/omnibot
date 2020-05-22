@@ -10,14 +10,13 @@ export class BaseHandler extends BaseService {
    * @param {*} cmd command to check
    */
   async check(cmd) {
-    const msg = await Message.findOne({ where: { id: cmd.dataValues.MessageId } });
+    const msg = await Message.findOne({ where: { id: cmd.dataValues.MessageId }});
     const channel = await this.client.channels.get(msg.dataValues.channel);
     const message = await channel.fetchMessage(msg.dataValues.id);
 
     const isCommand = includes(this.options.commands, cmd.dataValues.name);
     const isAllowed = !isEmpty(intersection(this.options.roles, message.member.roles.map((role) => role.name))) || isEmpty(this.options.roles) || this.options.roles === undefined;
 
-    console.log(isCommand, isAllowed);
     return isCommand && isAllowed;
   }
 

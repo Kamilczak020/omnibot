@@ -26,7 +26,6 @@ parsers:
       - 'restart'
       - 's'
       - 'stats'
-      - 'tg_autocannon'
       - 'unmute'
       - 'warn'
   splitParser:
@@ -48,14 +47,6 @@ handlers:
         channel: '591384965489491989'
     roles:
       - 'Administrator'
-      - 'Owner'
-  autocannonHandler:
-    name: 'autocannonHandler'
-    commands:
-      - 'tg_autocannon'
-    roles:
-      - 'Administrator'
-      - 'Moderator'
       - 'Owner'
   chooseHandler:
     name: 'chooseHandler'
@@ -238,8 +229,6 @@ watchers:
     channels:
       join: '597706602920935428'
       leave: '597706815773474836'
-  autocannonWatcher:
-    name: 'autocannonWatcher'
 
 filters:
   userFilter:
@@ -268,9 +257,6 @@ filters:
       - 'spastic'
       - 'trannie'
       - 'tranny'
-      - 'pepega'
-      - 'simp'
-      - 'cunty'
 
 tasks:
   reminderTask:

@@ -19,7 +19,6 @@ export class Bot {
     this.reactionHandler;
     this.confessionHandler;
     this.channelReactionWatcher;
-    this.autocannonWatcher;
     this.userFeedWatcher;
 
     this.parsers = [];
@@ -105,36 +104,29 @@ export class Bot {
     }
 
     this.channelReactionWatcher.react(msg);
-    // this.autocannonWatcher.react(msg);
 
-    this.logger.debug(msg.dataValues.body);
-
-    for (const parser of this.parsers) {
-      const parserCheck = await parser.check(msg);
-      if (parserCheck) {
+    this.parsers.forEach(async (parser) => {
+      if (await parser.check(msg)) {
         try {
           await msg.save();
           const command = await parser.parse(msg);
           this.commands.next(command);
-          this.logger.info({ msg }, 'Message was parsed successfully.');
           return;
-        } catch (error) {
-          this.logger.error({ error }, 'Parser failed to parse the message');
-          return;
+        } catch (err) {
+          console.log(err);
+          this.logger.error('Parser failed to parse the message');
         }
       }
+    });
 
-      this.logger.debug({ msg }, 'Message did not produce any commands');
-    }
+    this.logger.debug({ msg }, 'Message did not produce any commands');
   }
 
-  /**
- * Runs the message through handlers.
- * @param {*} cmd command to handle
- */
+    /**
+   * Runs the message through handlers.
+   * @param {*} cmd command to handle
+   */
   async handleCommand(cmd) {
-    this.logger.info({ cmd }, 'Handling command..');
-
     this.handlers.forEach(async (handler) => {
       if (await handler.check(cmd)) {
         try {
@@ -210,7 +202,7 @@ export class Bot {
    */
   registerService(serviceDefinition, serviceType, options) {
     const service = new serviceDefinition(this.client, this.logger, this.dataStore, options);
-    switch (serviceType) {
+    switch(serviceType) {
       case 'parser':
         this.parsers.push(service);
         break;
@@ -220,7 +212,7 @@ export class Bot {
       case 'filter':
         this.filters.push(service);
         break;
-      case 'task':
+      case 'task': 
         this.tasks.push(service);
         break;
       case 'reactionHandler':
@@ -231,9 +223,6 @@ export class Bot {
         break;
       case 'channelReactionWatcher':
         this.channelReactionWatcher = service;
-        break;
-      case 'autocannonWatcher':
-        this.autocannonWatcher = service;
         break;
       case 'userFeedWatcher':
         this.userFeedWatcher = service;

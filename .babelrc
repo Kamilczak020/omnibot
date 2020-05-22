@@ -11,8 +11,7 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-transform-for-of",
     "@babel/plugin-transform-regenerator",
     "@babel/plugin-transform-destructuring"
-  ]
+  ],
 }
