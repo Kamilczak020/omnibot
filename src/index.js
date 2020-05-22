@@ -1,7 +1,6 @@
 'use strict';
 import 'babel-polyfill';
 import * as dotenv from 'dotenv';
-import { isNil } from 'lodash';
 import { Bot } from './core/bot';
 import { loadConfig } from './core/config';
 import { createDatabase } from './core/database';
@@ -46,12 +45,15 @@ const database = createDatabase();
 const bot = new Bot(logger);
 
 database.sequelize.authenticate()
-  .then(() => loadBot())
+  .then(() => {
+    logger.info('Initializing bot modules..');
+    loadBot();
+  })
   .catch((error) => {
-    logger.error({ error }, 'Failed to connect to database');
+    logger.error(`Failed to connect to database ${error}`);
   });
 
-function loadBot() {
+async function loadBot() {
   // register parsers
   bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
   bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
@@ -93,7 +95,7 @@ function loadBot() {
   bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
   // bot.registerService(BirthdayTask, 'task', config.tasks.birthdayTask);
 
-  bot.start();
+  await bot.start();
 }
 
 if (process.argv[2] === 'sync') {

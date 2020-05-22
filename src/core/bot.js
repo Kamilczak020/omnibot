@@ -61,13 +61,6 @@ export class Bot {
     await this.client.login(process.env.DISCORD_TOKEN);
     await this.client.user.setPresence({ game: { name: '!listcommands' }, status: 'online' });
 
-    try {
-      const message = await Message.findOne({ where: { id: '713016799775424562' } });
-      this.logger.info(message);
-    } catch (error) {
-      this.logger.error(error);
-    }
-
     this.tasks.forEach(async (task) => {
       await task.start();
     });
