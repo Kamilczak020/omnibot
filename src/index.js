@@ -39,23 +39,41 @@ import { AutocannonWatcher } from './watcher/autocannonWatcher';
 
 dotenv.config();
 
-const logger = createLogger();
-const config = loadConfig('./build/config.yml');
-const database = createDatabase();
-const bot = new Bot(logger);
-
-database.sequelize.authenticate()
+try {
+  const logger = createLogger();
+  const config = loadConfig('./build/config.yml');
+  const database = createDatabase();
+  const bot = new Bot(logger);
+  
+  database.sequelize.authenticate()
   .then(() => {
     logger.info('Initializing bot modules..\n');
     console.log('Initializing bot modules..\n');
-    loadBot();
+    loadBot(bot, config);
   })
   .catch((error) => {
     console.log(`Failed to connect to database ${error}\n`);
     console.log(`Failed to connect to database ${error}\n`);
   });
 
-async function loadBot() {
+  if (process.argv[2] === 'sync') {
+    try {
+      database.sequelize.sync();
+    } catch (err) {
+      logger.error(err);
+    }
+  }
+  
+  process.on('exit', () => {
+    bot.stop();
+  });
+  
+} catch (error) {
+  console.log(error);
+  console.log(error);
+}
+
+async function loadBot(bot, config) {
   // register parsers
   bot.registerService(EchoParser, 'parser', config.parsers.echoParser);
   bot.registerService(SplitParser, 'parser', config.parsers.splitParser);
@@ -99,15 +117,3 @@ async function loadBot() {
 
   await bot.start();
 }
-
-if (process.argv[2] === 'sync') {
-  try {
-    database.sequelize.sync();
-  } catch (err) {
-    logger.error(err);
-  }
-}
-
-process.on('exit', () => {
-  bot.stop();
-});
