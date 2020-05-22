@@ -112,12 +112,11 @@ export class Bot {
     for (const parser of this.parsers) {
       const parserCheck = await parser.check(msg);
       if (parserCheck) {
-        this.logger.info({ msg }, 'Message was parsed successfully.');
-
         try {
           await msg.save();
           const command = await parser.parse(msg);
           this.commands.next(command);
+          this.logger.info({ msg }, 'Message was parsed successfully.');
           return;
         } catch (error) {
           this.logger.error({ error }, 'Parser failed to parse the message');
@@ -134,6 +133,7 @@ export class Bot {
  * @param {*} cmd command to handle
  */
   async handleCommand(cmd) {
+    this.logger.info('Does it ever reach here??');
     this.logger.info({ cmd }, 'Handling command..');
 
     this.handlers.forEach(async (handler) => {
