@@ -105,7 +105,7 @@ export class Bot {
     }
 
     this.channelReactionWatcher.react(msg);
-    this.autocannonWatcher.react(msg);
+    // this.autocannonWatcher.react(msg);
 
     this.logger.debug(msg.dataValues.body);
 
@@ -134,7 +134,7 @@ export class Bot {
  * @param {*} cmd command to handle
  */
   async handleCommand(cmd) {
-    this.logger.debug({ cmd }, 'Handling command');
+    this.logger.info({ cmd }, 'Handling command..');
 
     this.handlers.forEach(async (handler) => {
       if (await handler.check(cmd)) {
