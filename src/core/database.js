@@ -8,14 +8,15 @@ import { Warning } from '../model/warning';
 import { Reminder } from '../model/reminder';
 import { Birthday } from '../model/birthday';
 
-export function createDatabase() {
+export function createDatabase(logger) {
   const sequelize = new Sequelize({
     database: process.env.DB_NAME,
     dialect: 'postgres',
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     password: process.env.DB_PASSWORD,
-    username: process.env.DB_USERNAME
+    username: process.env.DB_USERNAME,
+    logging: (msg) => logger.debug(msg),
   });
 
   // Link models to database

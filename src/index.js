@@ -40,7 +40,7 @@ dotenv.config();
 
 const logger = createLogger();
 const config = loadConfig('./build/config.yml');
-const database = createDatabase();
+const database = createDatabase(logger);
 const bot = new Bot(logger);
 
 database.sequelize.authenticate().then((errors) => {
