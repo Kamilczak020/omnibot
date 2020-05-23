@@ -6,7 +6,6 @@ import { CommandData } from '../model/commandData';
 import { CustomCommand } from '../model/customCommand';
 import { Warning } from '../model/warning';
 import { Reminder } from '../model/reminder';
-import { Birthday } from '../model/birthday';
 
 export function createDatabase(logger) {
   const sequelize = new Sequelize({

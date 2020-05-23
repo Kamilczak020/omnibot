@@ -3,6 +3,6 @@ version: '3'
 services:
   rlduels-dev:
     build: .
-    image: greenchill/omnibot:master
+    image: rlduels
     env_file:
       - .env
