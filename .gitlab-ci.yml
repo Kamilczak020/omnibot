@@ -44,7 +44,7 @@ deploy-to-cluster:
   stage: deploy
   only: [master]
   tags:
-    - builder
+    - omnibot-builder
   image: greenchill/kubernetes-deploy:master
   script:
     - sed -i "s/<COMMIT_SHA>/${CI_COMMIT_SHA}/g" $DEPLOYMENT_MANIFEST
