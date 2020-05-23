@@ -43,11 +43,9 @@ const config = loadConfig('./build/config.yml');
 const database = createDatabase(logger);
 const bot = new Bot(logger);
 
-database.sequelize.authenticate().then((errors) => {
-  if (!isNil(errors)) {
-    logger.error({ errors }, 'Failed to connect to database');
-    process.exit();
-  }
+database.sequelize.authenticate().catch((error) => {
+  console.log('Failed to connect to database', error);
+  process.exit();
 });
 
 // register parsers
