@@ -34,7 +34,7 @@ import { CustomCommandParser } from './parser/customCommandParser';
 import { StatsHandler } from './handler/statsHandler';
 import { SedHandler } from './handler/sedHandler';
 import { AutocannonHandler } from './handler/autocannonHandler';
-import { AutocannonWatcher } from './handler/autocannonWatcher';
+import { AutocannonWatcher } from './watcher/autocannonWatcher';
 
 dotenv.config();
 
