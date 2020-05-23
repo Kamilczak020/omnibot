@@ -13,6 +13,7 @@ export function createDatabase() {
     database: process.env.DB_NAME,
     dialect: 'postgres',
     host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     password: process.env.DB_PASSWORD,
     username: process.env.DB_USERNAME
   });
@@ -20,7 +21,6 @@ export function createDatabase() {
   // Link models to database
   const models = {
     Message: Message.init(sequelize, Sequelize),
-    Birthday: Birthday.init(sequelize, Sequelize),
     Command: Command.init(sequelize, Sequelize),
     CommandData: CommandData.init(sequelize, Sequelize),
     CustomCommand: CustomCommand.init(sequelize, Sequelize),

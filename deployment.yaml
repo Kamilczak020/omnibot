@@ -36,6 +36,11 @@ spec:
             secretKeyRef:
               name: omnibot-secrets
               key: db-host
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              name: omnibot-secrets
+              key: db-port
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
