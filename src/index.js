@@ -38,6 +38,9 @@ import { SedHandler } from './handler/sedHandler';
 
 dotenv.config();
 
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_PORT);
+
 const logger = createLogger();
 const config = loadConfig('./build/config.yml');
 const database = createDatabase(logger);
