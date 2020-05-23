@@ -33,6 +33,8 @@ import { UserFilter } from './filter/userFilter';
 import { CustomCommandParser } from './parser/customCommandParser';
 import { StatsHandler } from './handler/statsHandler';
 import { SedHandler } from './handler/sedHandler';
+import { AutocannonHandler } from './handler/autocannonHandler';
+import { AutocannonWatcher } from './handler/autocannonWatcher';
 
 dotenv.config();
 
@@ -73,6 +75,7 @@ async function start() {
     bot.registerService(MathHandler, 'handler', config.handlers.mathHandler);
     bot.registerService(StatsHandler, 'handler', config.handlers.statsHandler);
     bot.registerService(SedHandler, 'handler', config.handlers.sedHandler);
+    bot.registerService(AutocannonHandler, 'handler', config.handlers.autocannonHandler);
 
     // register filters
     bot.registerService(BadWordFilter, 'filter', config.filters.badWordFilter);
@@ -84,6 +87,7 @@ async function start() {
     // register watchers
     bot.registerService(ChannelReactionWatcher, 'channelReactionWatcher', config.watchers.channelReactionWatcher);
     bot.registerService(UserFeedWatcher, 'userFeedWatcher', config.watchers.userFeedWatcher);
+    bot.registerService(AutocannonWatcher, 'autocannonWatcher', config.watchers.autocannonWatcher);
 
     // register tasks
     bot.registerService(ReminderTask, 'task', config.tasks.reminderTask);
