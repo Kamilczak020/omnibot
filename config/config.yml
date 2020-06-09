@@ -179,6 +179,9 @@ handlers:
       - message: '591383968826523649'
         emoji: '📺'
         role: '590113143213260801'
+      - message: '719707121578541087'
+        emoji: '🎮'
+        role: '719707620453384263'
   remindmeHandler:
     name: 'remindmeHandler'
     commands:
