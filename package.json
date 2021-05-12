@@ -56,7 +56,7 @@
     "fuzzyset.js": "^0.0.91",
     "js-yaml": "^3.13.1",
     "lodash": "^4.17.11",
-    "mathjs": "^6.0.3",
+    "mathjs": "^7.5.1",
     "next-birthday": "^1.0.0",
     "pg": "^8.2.1",
     "pg-hstore": "^2.3.3",
